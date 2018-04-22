@@ -29,12 +29,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         login.cpp \
-    info.cpp
+    info.cpp \
+    mainmenu.cpp
 
 HEADERS += \
         login.h \
-    info.h
+    info.h \
+    mainmenu.h
 
 FORMS += \
         login.ui \
-    info.ui
+    info.ui \
+    mainmenu.ui
