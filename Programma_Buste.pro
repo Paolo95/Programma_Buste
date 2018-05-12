@@ -8,7 +8,6 @@ QT       += \
             core gui \
             sql
 
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Programma_Buste
@@ -30,14 +29,22 @@ SOURCES += \
         main.cpp \
         login.cpp \
     info.cpp \
-    mainmenu.cpp
+    consegnaMateriale.cpp \
+    dbConnect.cpp \
+    mainMenu.cpp \
+    elencoTari.cpp
 
 HEADERS += \
         login.h \
     info.h \
-    mainmenu.h
+    dbconnect.h \
+    consegnaMateriale.h \
+    mainMenu.h \
+    elencotari.h
 
 FORMS += \
         login.ui \
     info.ui \
-    mainmenu.ui
+    consegnaMateriale.ui \
+    mainMenu.ui \
+    elencoTari.ui

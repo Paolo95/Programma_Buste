@@ -3,12 +3,10 @@
 
 #include <QMainWindow>
 #include "info.h"
-#include <QtSql/QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include "mainmenu.h"
+#include "mainMenu.h"
 #include <QMessageBox>
 #include <QCloseEvent>
+#include "dbconnect.h"
 
 using namespace std;
 
@@ -37,7 +35,7 @@ private slots:
 private:
     Ui::Login *ui;
     Info* uiInfo;
-    QSqlDatabase db;
+    DbConnect *db;
     QSqlQuery query;
     QSqlRecord record;
     string stringQuery;

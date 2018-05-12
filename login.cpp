@@ -1,7 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
-#include <QtSql/QtSql>
-#include <QtSql/QSqlQuery>
+#include "dbconnect.h"
 
 Login::Login(QWidget *parent) :
     QMainWindow(parent),
@@ -9,25 +8,25 @@ Login::Login(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->txtUsername->setFocus();
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setUserName("root");
-    db.setPassword("");
-    db.setDatabaseName("gerico");
-    db.open();
 
-    if (db.isOpen()){
+    db= new DbConnect();
+    db->openConnection();
+
+    if (db->isOpen()){
         statusBar()->setStyleSheet("color: green");
         statusBar()->showMessage("Database connesso!");
     }
         else{
             ui->BtnLogin->setEnabled(false);
+            ui->txtUsername->setEnabled(false);
+            ui->txtPassword->setEnabled(false);
             statusBar()->setStyleSheet("color: red");
             statusBar()->showMessage("Database non connesso!");
         }
 
-      db.close();
-    }
+      db->closeConnection();
+}
+
 
 
 Login::~Login()
@@ -63,20 +62,15 @@ void Login::on_BtnInfo_clicked()
 
 void Login::on_BtnLogin_clicked()
 {
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setUserName("root");
-    db.setPassword("");
-    db.setDatabaseName("gerico");
-    db.open();
+    db->openConnection();
 
     username=ui->txtUsername->text().toStdString();
     password=ui->txtPassword->text().toStdString();
     if ( username.empty() || password.empty() ){
     error.information(0,"Errore","Inserisci username e password!");
     }else{
-            stringQuery="SELECT * FROM UTENTE WHERE USERNAME ='"+username+ "'" + " AND PASSWORD='"+password+"'";
-            query = db.exec(QString::fromStdString(stringQuery));
+            stringQuery="SELECT * FROM utente WHERE (BINARY USERNAME ='"+username+ "'" + " AND BINARY PASSWORD='"+password+"')";
+            query = db->executeQuery(QString::fromStdString(stringQuery));
             if (query.size()==0){
                 error.information(0,"Login non eseguito","Nome utente e/o password errati o non esistenti!");
             }else{
@@ -85,27 +79,22 @@ void Login::on_BtnLogin_clicked()
             m->show();
             }
     }
-    db.close();
+    db->closeConnection();
 
 }
 
 
 void Login::on_txtPassword_returnPressed()
 {
-    db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setUserName("root");
-    db.setPassword("");
-    db.setDatabaseName("gerico");
-    db.open();
+    db->openConnection();
 
     username=ui->txtUsername->text().toStdString();
     password=ui->txtPassword->text().toStdString();
     if ( username.empty() || password.empty() ){
     error.information(0,"Errore","Inserisci username e password!");
     }else{
-            stringQuery="SELECT * FROM UTENTE WHERE USERNAME ='"+username+ "'" + " AND PASSWORD='"+password+"'";
-            query = db.exec(QString::fromStdString(stringQuery));
+            stringQuery="SELECT * FROM utente WHERE (BINARY USERNAME ='"+username+ "'" + " AND BINARY PASSWORD='"+password+"')";
+            query = db->executeQuery(QString::fromStdString(stringQuery));
             if (query.size()==0){
                 error.information(0,"Login non eseguito","Nome utente e/o password errati o non esistenti!");
             }else{
@@ -114,7 +103,7 @@ void Login::on_txtPassword_returnPressed()
             m->show();
             }
     }
-    db.close();
+    db->closeConnection();
 }
 
 void Login::closeEvent (QCloseEvent *event)
