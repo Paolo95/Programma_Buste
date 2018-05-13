@@ -1,0 +1,9 @@
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\contentsline {chapter}{\numberline {1}Descrizione del dominio applicativo}{3}
+\contentsline {section}{\numberline {1.1}Utenti}{3}
+\contentsline {section}{\numberline {1.2}Tipologie di rotoli}{4}
+\contentsline {section}{\numberline {1.3}Tipologie di secchi}{4}
+\contentsline {section}{\numberline {1.4}Organizzazione logistica}{4}
+\contentsline {chapter}{\numberline {2}Funzionalit\`a del programma}{5}
+\contentsline {chapter}{\numberline {3}Esempio di interfaccia grafica}{6}
