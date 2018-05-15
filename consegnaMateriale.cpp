@@ -1,5 +1,8 @@
 #include "consegnaMateriale.h"
 #include "mainMenu.h"
+#include <iostream>
+
+using namespace std;
 
 Consegna_Materiale::Consegna_Materiale(QWidget *parent) :
     QMainWindow(parent),
@@ -178,4 +181,18 @@ void Consegna_Materiale::on_cmdLinkBtnVerifica_clicked()
         index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),5,QModelIndex());
         civico = ui->tblRicerca->model()->data(index).toString().toStdString();
     }
+
+    db = new DbConnect();
+    db->openConnection();
+
+    stringQuery="SELECT data_richiesta FROM richiesta r, cliente c WHERE c.id_cliente=r.cliente ORDER BY data_richiesta DESC LIMIT 1";
+    query = db->executeQuery(QString::fromStdString(stringQuery));
+
+    ui->lblDataUltimaRichiestaDb->setVisible(true);
+    query.next();
+    ui->lblDataUltimaRichiestaDb->setText(query.value(0).toString());
+
+
+    db->closeConnection();
+
 }

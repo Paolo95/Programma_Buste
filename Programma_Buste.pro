@@ -47,4 +47,5 @@ FORMS += \
     info.ui \
     consegnaMateriale.ui \
     mainMenu.ui \
-    elencoTari.ui
+    elencoTari.ui \
+    elencotari.ui

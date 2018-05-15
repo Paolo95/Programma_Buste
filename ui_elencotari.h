@@ -33,7 +33,9 @@ public:
     {
         if (ElencoTari->objectName().isEmpty())
             ElencoTari->setObjectName(QStringLiteral("ElencoTari"));
-        ElencoTari->resize(735, 517);
+        ElencoTari->resize(736, 517);
+        ElencoTari->setMinimumSize(QSize(736, 517));
+        ElencoTari->setMaximumSize(QSize(736, 517));
         btnElencoEsci = new QPushButton(ElencoTari);
         btnElencoEsci->setObjectName(QStringLiteral("btnElencoEsci"));
         btnElencoEsci->setGeometry(QRect(640, 470, 75, 23));

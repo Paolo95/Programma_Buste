@@ -1,8 +1,15 @@
 #include "dbconnect.h"
+#include <iostream>
+
+using namespace std;
 
 DbConnect::DbConnect()
 {
-    db = QSqlDatabase::addDatabase("QMYSQL");
+    if (QSqlDatabase::contains()){
+        db = QSqlDatabase::database(QLatin1String(QSqlDatabase::defaultConnection), false);
+    }else{
+        db = QSqlDatabase::addDatabase("QMYSQL");
+    }
     db.setHostName("127.0.0.1");
     db.setUserName("root");
     db.setPassword("");

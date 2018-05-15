@@ -77,6 +77,8 @@ public:
         if (Consegna_Materiale->objectName().isEmpty())
             Consegna_Materiale->setObjectName(QStringLiteral("Consegna_Materiale"));
         Consegna_Materiale->resize(800, 600);
+        Consegna_Materiale->setMinimumSize(QSize(800, 600));
+        Consegna_Materiale->setMaximumSize(QSize(800, 600));
         centralwidget = new QWidget(Consegna_Materiale);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         BtnMaterialeEsci = new QPushButton(centralwidget);

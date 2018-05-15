@@ -673,7 +673,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents /opt/Qt/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents login.h info.h dbconnect.h consegnaMateriale.h mainMenu.h elencotari.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp login.cpp info.cpp consegnaMateriale.cpp dbConnect.cpp mainMenu.cpp elencoTari.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents login.ui info.ui consegnaMateriale.ui mainMenu.ui elencotari.ui $(DISTDIR)/
+	$(COPY_FILE) --parents login.ui info.ui consegnaMateriale.ui mainMenu.ui elencotari.ui elencotari.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1901,9 +1901,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h
+compiler_uic_make_all: ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_elencotari.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h
+	-$(DEL_FILE) ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_elencotari.h
 ui_login.h: login.ui \
 		/opt/Qt/5.10.1/gcc_64/bin/uic
 	/opt/Qt/5.10.1/gcc_64/bin/uic login.ui -o ui_login.h
@@ -1923,6 +1923,7 @@ ui_mainMenu.h: mainMenu.ui \
 ui_elencotari.h: elencotari.ui \
 		/opt/Qt/5.10.1/gcc_64/bin/uic
 	/opt/Qt/5.10.1/gcc_64/bin/uic elencotari.ui -o ui_elencotari.h
+
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
