@@ -20,8 +20,8 @@ public:
 
 private slots:
     void on_btnElencoEsci_clicked();
-    void on_rBtnElencoPrivato_clicked();
-    void on_rBtnElencoAziende_clicked();
+
+    void on_btnCerca_clicked();
 
 private:
     Ui::ElencoTari *ui;
@@ -29,6 +29,7 @@ private:
     string stringQuery;
     QSqlQuery query;
     QSqlQueryModel *model;
+    QMessageBox error;
 };
 
 #endif // ELENCOTARI_H
