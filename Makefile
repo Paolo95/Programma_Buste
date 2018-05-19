@@ -1924,7 +1924,6 @@ ui_elencotari.h: elencotari.ui \
 		/opt/Qt/5.10.1/gcc_64/bin/uic
 	/opt/Qt/5.10.1/gcc_64/bin/uic elencotari.ui -o ui_elencotari.h
 
-
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include "dbconnect.h"
+#include <QMessageBox>
 #include <QStandardItemModel>
 #include "elencotari.h"
 #include "ui_consegnaMateriale.h"
@@ -36,6 +37,10 @@ private slots:
 
     void on_cmdLinkBtnVerifica_clicked();
 
+    void on_btnSalva_clicked();
+
+    void on_tblRicerca_clicked(const QModelIndex &index);
+
 private:
     Ui::Consegna_Materiale *ui;
     void closeEvent (QCloseEvent *event);
@@ -46,11 +51,13 @@ private:
     string civico;
     string tipologia;
     string stringQuery;
-    int i;
-    bool check;
+    string id_cliente;
     DbConnect *db;
     QSqlQuery query;
     QMessageBox error;
+    QMessageBox MessageExitConsegnaMateriale;
+    QAbstractButton *BtnSiConsegnaMateriale;
+    QAbstractButton *BtnNoConsegnaMateriale;
     QSqlQueryModel *model;
     QModelIndex index;
 };

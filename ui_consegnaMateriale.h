@@ -66,10 +66,14 @@ public:
     QLabel *lblVetro;
     QComboBox *comboBoxVetro;
     QGroupBox *grpSecchi;
-    QComboBox *comboBoxSecchi;
+    QComboBox *comboBoxSecchi240;
+    QComboBox *comboBoxSecchi1100;
+    QLabel *lblSecchi240;
+    QLabel *lblSecchi1100;
     QLabel *lblUltimaConsegna;
     QLabel *lblDataUltimaRichiestaDb;
     QCommandLinkButton *cmdLinkBtnVerifica;
+    QPushButton *btnSalva;
     QMenuBar *menubar;
 
     void setupUi(QMainWindow *Consegna_Materiale)
@@ -87,8 +91,10 @@ public:
         tblRicerca = new QTableView(centralwidget);
         tblRicerca->setObjectName(QStringLiteral("tblRicerca"));
         tblRicerca->setGeometry(QRect(10, 180, 781, 111));
+        tblRicerca->setSelectionMode(QAbstractItemView::SingleSelection);
+        tblRicerca->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblRicerca->setGridStyle(Qt::SolidLine);
-        tblRicerca->verticalHeader()->setVisible(true);
+        tblRicerca->verticalHeader()->setVisible(false);
         grpRicercaCittadino = new QGroupBox(centralwidget);
         grpRicercaCittadino->setObjectName(QStringLiteral("grpRicercaCittadino"));
         grpRicercaCittadino->setGeometry(QRect(10, 10, 611, 161));
@@ -235,21 +241,47 @@ public:
         comboBoxVetro->setGeometry(QRect(80, 40, 41, 22));
         grpSecchi = new QGroupBox(centralwidget);
         grpSecchi->setObjectName(QStringLiteral("grpSecchi"));
-        grpSecchi->setGeometry(QRect(10, 460, 371, 91));
-        comboBoxSecchi = new QComboBox(grpSecchi);
-        comboBoxSecchi->setObjectName(QStringLiteral("comboBoxSecchi"));
-        comboBoxSecchi->setGeometry(QRect(10, 30, 141, 22));
+        grpSecchi->setGeometry(QRect(10, 460, 231, 91));
+        comboBoxSecchi240 = new QComboBox(grpSecchi);
+        comboBoxSecchi240->addItem(QString());
+        comboBoxSecchi240->addItem(QString());
+        comboBoxSecchi240->addItem(QString());
+        comboBoxSecchi240->addItem(QString());
+        comboBoxSecchi240->addItem(QString());
+        comboBoxSecchi240->addItem(QString());
+        comboBoxSecchi240->setObjectName(QStringLiteral("comboBoxSecchi240"));
+        comboBoxSecchi240->setGeometry(QRect(30, 60, 41, 22));
+        comboBoxSecchi1100 = new QComboBox(grpSecchi);
+        comboBoxSecchi1100->addItem(QString());
+        comboBoxSecchi1100->addItem(QString());
+        comboBoxSecchi1100->addItem(QString());
+        comboBoxSecchi1100->addItem(QString());
+        comboBoxSecchi1100->addItem(QString());
+        comboBoxSecchi1100->addItem(QString());
+        comboBoxSecchi1100->setObjectName(QStringLiteral("comboBoxSecchi1100"));
+        comboBoxSecchi1100->setGeometry(QRect(150, 60, 41, 22));
+        lblSecchi240 = new QLabel(grpSecchi);
+        lblSecchi240->setObjectName(QStringLiteral("lblSecchi240"));
+        lblSecchi240->setGeometry(QRect(10, 30, 91, 16));
+        lblSecchi240->setFont(font);
+        lblSecchi1100 = new QLabel(grpSecchi);
+        lblSecchi1100->setObjectName(QStringLiteral("lblSecchi1100"));
+        lblSecchi1100->setGeometry(QRect(120, 30, 101, 16));
+        lblSecchi1100->setFont(font);
         lblUltimaConsegna = new QLabel(centralwidget);
         lblUltimaConsegna->setObjectName(QStringLiteral("lblUltimaConsegna"));
-        lblUltimaConsegna->setGeometry(QRect(10, 310, 161, 16));
+        lblUltimaConsegna->setGeometry(QRect(10, 310, 171, 21));
         lblUltimaConsegna->setFont(font);
         lblDataUltimaRichiestaDb = new QLabel(centralwidget);
         lblDataUltimaRichiestaDb->setObjectName(QStringLiteral("lblDataUltimaRichiestaDb"));
-        lblDataUltimaRichiestaDb->setGeometry(QRect(180, 310, 131, 16));
+        lblDataUltimaRichiestaDb->setGeometry(QRect(180, 310, 131, 21));
         lblDataUltimaRichiestaDb->setFont(font);
         cmdLinkBtnVerifica = new QCommandLinkButton(centralwidget);
         cmdLinkBtnVerifica->setObjectName(QStringLiteral("cmdLinkBtnVerifica"));
         cmdLinkBtnVerifica->setGeometry(QRect(690, 300, 91, 41));
+        btnSalva = new QPushButton(centralwidget);
+        btnSalva->setObjectName(QStringLiteral("btnSalva"));
+        btnSalva->setGeometry(QRect(568, 540, 111, 25));
         Consegna_Materiale->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Consegna_Materiale);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -334,9 +366,26 @@ public:
         comboBoxVetro->setItemText(5, QApplication::translate("Consegna_Materiale", "5", nullptr));
 
         grpSecchi->setTitle(QApplication::translate("Consegna_Materiale", "Richiesta secchi", nullptr));
+        comboBoxSecchi240->setItemText(0, QApplication::translate("Consegna_Materiale", "0", nullptr));
+        comboBoxSecchi240->setItemText(1, QApplication::translate("Consegna_Materiale", "1", nullptr));
+        comboBoxSecchi240->setItemText(2, QApplication::translate("Consegna_Materiale", "2", nullptr));
+        comboBoxSecchi240->setItemText(3, QApplication::translate("Consegna_Materiale", "3", nullptr));
+        comboBoxSecchi240->setItemText(4, QApplication::translate("Consegna_Materiale", "4", nullptr));
+        comboBoxSecchi240->setItemText(5, QApplication::translate("Consegna_Materiale", "5", nullptr));
+
+        comboBoxSecchi1100->setItemText(0, QApplication::translate("Consegna_Materiale", "0", nullptr));
+        comboBoxSecchi1100->setItemText(1, QApplication::translate("Consegna_Materiale", "1", nullptr));
+        comboBoxSecchi1100->setItemText(2, QApplication::translate("Consegna_Materiale", "2", nullptr));
+        comboBoxSecchi1100->setItemText(3, QApplication::translate("Consegna_Materiale", "3", nullptr));
+        comboBoxSecchi1100->setItemText(4, QApplication::translate("Consegna_Materiale", "4", nullptr));
+        comboBoxSecchi1100->setItemText(5, QApplication::translate("Consegna_Materiale", "5", nullptr));
+
+        lblSecchi240->setText(QApplication::translate("Consegna_Materiale", "Secchi 240 lt", nullptr));
+        lblSecchi1100->setText(QApplication::translate("Consegna_Materiale", "Secchi 1100 lt", nullptr));
         lblUltimaConsegna->setText(QApplication::translate("Consegna_Materiale", "Data ultima consegna :", nullptr));
-        lblDataUltimaRichiestaDb->setText(QApplication::translate("Consegna_Materiale", "TextLabel", nullptr));
+        lblDataUltimaRichiestaDb->setText(QString());
         cmdLinkBtnVerifica->setText(QApplication::translate("Consegna_Materiale", "Verifica", nullptr));
+        btnSalva->setText(QApplication::translate("Consegna_Materiale", "Salva richiesta", nullptr));
     } // retranslateUi
 
 };

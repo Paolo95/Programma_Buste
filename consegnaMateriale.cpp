@@ -11,6 +11,7 @@ Consegna_Materiale::Consegna_Materiale(QWidget *parent) :
     ui->setupUi(this);
     ui->lblDataUltimaRichiestaDb->setVisible(false);
     ui->cmdLinkBtnVerifica->setEnabled(false);
+    ui->btnSalva->setEnabled(false);
     ui->txtCognome->setEnabled(false);
     ui->txtNome->setEnabled(false);
     ui->txtRagioneSociale->setEnabled(false);
@@ -18,14 +19,6 @@ Consegna_Materiale::Consegna_Materiale(QWidget *parent) :
     ui->txtVia->setEnabled(false);
     db = new DbConnect();
     db->openConnection();
-    stringQuery="SELECT DESCRIZIONE FROM materiale WHERE TIPOLOGIA='SECCHIO'";
-    query = db->executeQuery(QString::fromStdString(stringQuery));
-    i=1;
-    ui->comboBoxSecchi->insertItem(0,"");
-    while (query.next()){
-        ui->comboBoxSecchi->insertItem(i,query.value(0).toString());
-        i++;
-    }
     db->closeConnection();
 }
 
@@ -36,9 +29,25 @@ Consegna_Materiale::~Consegna_Materiale()
 
 void Consegna_Materiale::on_BtnMaterialeEsci_clicked()
 {
-    this->hide();
-    MainMenu *menu = new MainMenu (this);
-    menu->show();
+    MessageExitConsegnaMateriale.setWindowTitle("Vuoi tornare indietro?");
+    MessageExitConsegnaMateriale.setText("Vuoi tornare al menù principale?");
+    MessageExitConsegnaMateriale.setIcon(QMessageBox::Information);
+    BtnSiConsegnaMateriale = MessageExitConsegnaMateriale.addButton(QObject::tr("Si"), QMessageBox::YesRole);
+    BtnNoConsegnaMateriale = MessageExitConsegnaMateriale.addButton(QObject::tr("No"), QMessageBox::NoRole);
+    MessageExitConsegnaMateriale.exec();
+
+    if (MessageExitConsegnaMateriale.clickedButton()==BtnSiConsegnaMateriale){
+          MessageExitConsegnaMateriale.close();
+            this->hide();
+             MainMenu *menu = new MainMenu (this);
+            menu->show();
+          }else{
+            MessageExitConsegnaMateriale.removeButton(BtnSiConsegnaMateriale);
+            MessageExitConsegnaMateriale.removeButton(BtnNoConsegnaMateriale);
+            MessageExitConsegnaMateriale.close();
+
+}
+
 }
 
 
@@ -52,7 +61,6 @@ void Consegna_Materiale::closeEvent (QCloseEvent *event)
 
 void Consegna_Materiale::on_BtnCerca_clicked()
 {
-    check=false;
     ragioneSociale=ui->txtRagioneSociale->text().toStdString();
     cognome=ui->txtCognome->text().toStdString();
     nome=ui->txtNome->text().toStdString();
@@ -61,21 +69,52 @@ void Consegna_Materiale::on_BtnCerca_clicked()
     db = new DbConnect();
     db->openConnection();
     if (!ragioneSociale.empty() && cognome.empty() && nome.empty() && !via.empty() && !civico.empty()){
-        stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO FROM cliente WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE='"+ragioneSociale+"' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE='"+ragioneSociale+"' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && !cognome.empty() && !nome.empty() && !via.empty() && !civico.empty()){
-        stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO FROM cliente WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"' AND NOME='"+nome+"' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"' AND NOME='"+nome+"' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && !cognome.empty() && nome.empty() && via.empty() && civico.empty()){
-        stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO FROM cliente WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"'";
+        stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (!ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && civico.empty()){
-        stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO FROM cliente WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE='"+ragioneSociale+"'";
+        stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE='"+ragioneSociale+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && !cognome.empty() && !nome.empty() && via.empty() && civico.empty()){
-        stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO FROM cliente WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"' AND NOME='"+nome+"'";
+        stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"' AND NOME='"+nome+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && !via.empty() && !civico.empty()){
-        check=true;
-        stringQuery="SELECT TIPOLOGIA,RAGIONE_SOCIALE,COGNOME,NOME,VIA,N_CIVICO FROM cliente WHERE VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        if (ui->rBtnPrivato->isChecked()){
+            stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA= 'PRIVATO' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        }else if (ui->rBtnAzienda->isChecked()){
+            stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA= 'AZIENDA' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+        }
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && !via.empty() && civico.empty()){
-        check=true;
-        stringQuery="SELECT TIPOLOGIA,RAGIONE_SOCIALE,COGNOME,NOME,VIA,N_CIVICO FROM cliente WHERE VIA='"+via+"'";
+        if (ui->rBtnPrivato->isChecked()){
+            stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA= 'PRIVATO' AND VIA='"+via+"'";
+        }else if (ui->rBtnAzienda->isChecked()){
+            stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
+                    "FROM cliente "
+                    "WHERE TIPOLOGIA= 'AZIENDA' AND VIA='"+via+"'";
+        }
+        query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && cognome.empty() && !nome.empty() && via.empty() && civico.empty()){
         error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && !civico.empty()){
@@ -86,41 +125,39 @@ void Consegna_Materiale::on_BtnCerca_clicked()
                                           "-Cognome\n"
                                           "-Via");
     }
-    query = db->executeQuery(QString::fromStdString(stringQuery));
 
     if (query.size()==0){
         error.information(0,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
     }else{
         model=new QSqlQueryModel();
         model->setQuery(query);
-        if (ui->rBtnPrivato->isChecked() && check==false){
+        if (ui->rBtnPrivato->isChecked() ){
             model->setHeaderData(0,Qt::Horizontal,"COGNOME");
             model->setHeaderData(1,Qt::Horizontal,"NOME");
             model->setHeaderData(2,Qt::Horizontal,"VIA");
             model->setHeaderData(3,Qt::Horizontal,"NUMERO CIVICO");
-        }else if (ui->rBtnAzienda->isChecked() && check==false){
+        }else if (ui->rBtnAzienda->isChecked() ){
             model->setHeaderData(0,Qt::Horizontal,"RAGIONE SOCIALE");
             model->setHeaderData(1,Qt::Horizontal,"VIA");
             model->setHeaderData(2,Qt::Horizontal,"NUMERO CIVICO");
-        }else if (check==true){
-            model->setHeaderData(0,Qt::Horizontal,"TIPOLOGIA");
-            model->setHeaderData(1,Qt::Horizontal,"RAGIONE SOCIALE");
-            model->setHeaderData(2,Qt::Horizontal,"COGNOME");
-            model->setHeaderData(3,Qt::Horizontal,"NOME");
-            model->setHeaderData(4,Qt::Horizontal,"VIA");
-            model->setHeaderData(5,Qt::Horizontal,"NUMERO CIVICO");
+
         }
         ui->tblRicerca->setModel(model);
         ui->tblRicerca->resizeColumnsToContents();
         ui->cmdLinkBtnVerifica->setEnabled(true);
         }
-
+    query.clear();
     db->closeConnection();
 
 }
 
 void Consegna_Materiale::on_rBtnPrivato_clicked()
 {
+    ui->txtCognome->clear();
+    ui->txtNome->clear();
+    ui->txtVia->clear();
+    ui->txtCivico->clear();
+    ui->txtRagioneSociale->clear();
     ui->txtRagioneSociale->setEnabled(false);
     ui->txtCognome->setEnabled(true);
     ui->txtNome->setEnabled(true);
@@ -132,6 +169,11 @@ void Consegna_Materiale::on_rBtnPrivato_clicked()
 
 void Consegna_Materiale::on_rBtnAzienda_clicked()
 {
+    ui->txtCognome->clear();
+    ui->txtNome->clear();
+    ui->txtVia->clear();
+    ui->txtCivico->clear();
+    ui->txtRagioneSociale->clear();
     ui->txtCognome->setEnabled(false);
     ui->txtNome->setEnabled(false);
     ui->txtRagioneSociale->setEnabled(true);
@@ -149,50 +191,151 @@ void Consegna_Materiale::on_BtnElenco_clicked()
 
 void Consegna_Materiale::on_cmdLinkBtnVerifica_clicked()
 {
-    if (ui->tblRicerca->selectionModel()->selectedRows().count()>1){
-        error.information(0,"Attenzione","Devi selezionare una sola riga per procedere!");
-    }else if (ui->rBtnPrivato->isChecked() && check==false){
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),0,QModelIndex());
-        cognome = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),1,QModelIndex());
-        nome = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),2,QModelIndex());
-        via = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),3,QModelIndex());
-        civico = ui->tblRicerca->model()->data(index).toString().toStdString();
-    }else if (ui->rBtnAzienda->isChecked() && check==false){
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),0,QModelIndex());
-        ragioneSociale = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),1,QModelIndex());
-        via = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),2,QModelIndex());
-        civico = ui->tblRicerca->model()->data(index).toString().toStdString();
-    }else if (check==true){
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),0,QModelIndex());
-        tipologia = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),1,QModelIndex());
-        ragioneSociale = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),2,QModelIndex());
-        cognome = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),3,QModelIndex());
-        nome = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),4,QModelIndex());
-        via = ui->tblRicerca->model()->data(index).toString().toStdString();
-        index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),5,QModelIndex());
-        civico = ui->tblRicerca->model()->data(index).toString().toStdString();
-    }
+    if (ui->tblRicerca->selectionModel()->currentIndex().row()==-1){
+        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+    }else{
+        ui->btnSalva->setEnabled(true);
+            if (ui->rBtnPrivato->isChecked()){
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),0,QModelIndex());
+                cognome = ui->tblRicerca->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),1,QModelIndex());
+                nome = ui->tblRicerca->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),2,QModelIndex());
+                via = ui->tblRicerca->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),3,QModelIndex());
+                civico = ui->tblRicerca->model()->data(index).toString().toStdString();
+            }else if (ui->rBtnAzienda->isChecked()){
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),0,QModelIndex());
+                ragioneSociale = ui->tblRicerca->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),1,QModelIndex());
+                via = ui->tblRicerca->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),2,QModelIndex());
+                civico = ui->tblRicerca->model()->data(index).toString().toStdString();
+             }
 
     db = new DbConnect();
     db->openConnection();
 
-    stringQuery="SELECT data_richiesta FROM richiesta r, cliente c WHERE c.id_cliente=r.cliente ORDER BY data_richiesta DESC LIMIT 1";
+    if (ui->rBtnPrivato->isChecked()){
+    stringQuery="SELECT data_richiesta "
+                "FROM richiesta r, cliente c "
+                "WHERE c.id_cliente=r.cliente AND c.cognome='"+cognome+"' AND c.nome='"+nome+"' AND c.via='"+via+"' AND c.n_civico='"+civico+"'"
+                "ORDER BY data_richiesta "
+                "DESC LIMIT 1";
+    }else if (ui->rBtnAzienda->isChecked()){
+        stringQuery="SELECT data_richiesta "
+                    "FROM richiesta r, cliente c "
+                    "WHERE c.id_cliente=r.cliente AND c.ragione_sociale='"+ragioneSociale+"' AND c.via='"+via+"' AND c.n_civico='"+civico+"'"
+                    "ORDER BY data_richiesta "
+                    "DESC LIMIT 1";
+    }
     query = db->executeQuery(QString::fromStdString(stringQuery));
-
+    if (query.size()==0){
+        ui->lblDataUltimaRichiestaDb->setVisible(true);
+        error.information(0,"Info","Il cliente non ha mai effetuato una richiesta!");
+    }else{
     ui->lblDataUltimaRichiestaDb->setVisible(true);
     query.next();
     ui->lblDataUltimaRichiestaDb->setText(query.value(0).toString());
-
-
+    }
+    query.clear();
     db->closeConnection();
+    }
+}
 
+
+void Consegna_Materiale::on_tblRicerca_clicked(const QModelIndex &index)
+{
+   index.row();
+   ui->lblDataUltimaRichiestaDb->clear();
+}
+
+void Consegna_Materiale::on_btnSalva_clicked()
+{
+    db->openConnection();
+    if (ui->comboBoxBianche->currentIndex()==0 && ui->comboBoxRosse->currentIndex()==0 && ui->comboBoxVerdi->currentIndex()==0
+            && ui->comboBoxBlu->currentIndex()==0 && ui->comboBoxCalendari->currentIndex()==0 && ui->comboBoxSecchi240->currentIndex()==0 &&
+            ui->comboBoxUmido->currentIndex()==0 && ui->comboBoxVetro->currentIndex()==0 && ui->comboBoxSecchi1100->currentIndex()==0){
+        error.information(0,"Attenzione!","Devi indicare almeno un materiale da consegnare al cittadino!");
+    }else if (ui->rBtnPrivato->isChecked()){
+        stringQuery="SELECT id_cliente "
+                    "FROM cliente "
+                    "WHERE cognome='"+cognome+"' AND nome='"+nome+"' AND via='"+via+"' AND n_civico='"+civico+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
+        query.next();
+        id_cliente=query.value(0).toString().toStdString();
+        stringQuery="INSERT INTO richiesta "
+                    "VALUES (CURRENT_DATE(),'"+id_cliente+"','"+QVariant(ui->comboBoxRosse->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxBlu->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxVerdi->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxBianche->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxCalendari->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxUmido->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxVetro->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchi1100->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchi240->currentIndex()).toString().toStdString()+"');";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
+        if (db->lastError().isValid()){
+            error.information(0,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
+        }else{
+            error.information(0,"Info","Richiesta registrata correttamente!");
+            ui->comboBoxBianche->setCurrentIndex(0);
+            ui->comboBoxBlu->setCurrentIndex(0);
+            ui->comboBoxVerdi->setCurrentIndex(0);
+            ui->comboBoxRosse->setCurrentIndex(0);
+            ui->comboBoxCalendari->setCurrentIndex(0);
+            ui->comboBoxUmido->setCurrentIndex(0);
+            ui->comboBoxVetro->setCurrentIndex(0);
+            ui->comboBoxSecchi240->setCurrentIndex(0);
+            ui->comboBoxSecchi1100->setCurrentIndex(0);
+            ui->lblDataUltimaRichiestaDb->clear();
+            model->clear();
+            ui->tblRicerca->setModel(model);
+            ui->txtCognome->clear();
+            ui->txtNome->clear();
+            ui->txtRagioneSociale->clear();
+            ui->txtVia->clear();
+            ui->txtCivico->clear();
+        }
+    }else if (ui->rBtnAzienda->isChecked()){
+        stringQuery="SELECT id_cliente "
+                    "FROM cliente "
+                    "WHERE ragione_sociale='"+ragioneSociale+"' AND via='"+via+"' AND n_civico='"+civico+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
+        query.next();
+        id_cliente=query.value(0).toString().toStdString();
+        stringQuery="INSERT INTO richiesta "
+                    "VALUES (CURRENT_DATE(),'"+id_cliente+"','"+QVariant(ui->comboBoxRosse->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxBlu->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxVerdi->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxBianche->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxCalendari->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxUmido->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxVetro->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchi1100->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchi240->currentIndex()).toString().toStdString()+"');";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
+        if (db->lastError().isValid()){
+            error.information(0,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
+        }else{
+            error.information(0,"Info","Richiesta registrata correttamente!");
+            ui->comboBoxBianche->setCurrentIndex(0);
+            ui->comboBoxBlu->setCurrentIndex(0);
+            ui->comboBoxVerdi->setCurrentIndex(0);
+            ui->comboBoxRosse->setCurrentIndex(0);
+            ui->comboBoxCalendari->setCurrentIndex(0);
+            ui->comboBoxUmido->setCurrentIndex(0);
+            ui->comboBoxVetro->setCurrentIndex(0);
+            ui->comboBoxSecchi240->setCurrentIndex(0);
+            ui->comboBoxSecchi1100->setCurrentIndex(0);
+            ui->lblDataUltimaRichiestaDb->clear();
+            model->clear();
+            ui->tblRicerca->setModel(model);
+            ui->txtCognome->clear();
+            ui->txtNome->clear();
+            ui->txtRagioneSociale->clear();
+            ui->txtVia->clear();
+            ui->txtCivico->clear();
+        }
+    }
 }
