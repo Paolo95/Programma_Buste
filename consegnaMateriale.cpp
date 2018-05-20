@@ -71,7 +71,7 @@ void Consegna_Materiale::on_BtnCerca_clicked()
     if (!ragioneSociale.empty() && cognome.empty() && nome.empty() && !via.empty() && !civico.empty()){
         stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
                     "FROM cliente "
-                    "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE='"+ragioneSociale+"' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+                    "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE LIKE '%"+ragioneSociale+"%' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
         query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && !cognome.empty() && !nome.empty() && !via.empty() && !civico.empty()){
         stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
@@ -86,7 +86,7 @@ void Consegna_Materiale::on_BtnCerca_clicked()
     }else if (!ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && civico.empty()){
         stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
                     "FROM cliente "
-                    "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE='"+ragioneSociale+"'";
+                    "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE LIKE '%"+ragioneSociale+"%'";
         query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && !cognome.empty() && !nome.empty() && via.empty() && civico.empty()){
         stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "

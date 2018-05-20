@@ -49,7 +49,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>370</y>
+      <y>320</y>
       <width>191</width>
       <height>41</height>
      </rect>
@@ -71,10 +71,10 @@
      <string>Consegna Materiale</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btnCentroFiera">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>410</x>
       <y>110</y>
       <width>191</width>
       <height>111</height>
@@ -97,7 +97,7 @@
      <enum>QFrame::NoFrame</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="BtnConsegnaMateriale_2">
+   <widget class="QPushButton" name="btnBiblioteca">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -110,7 +110,7 @@
      <string>Biblioteca</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BtnConsegnaMateriale_3">
+   <widget class="QPushButton" name="btnAnagrafica">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -123,7 +123,7 @@
      <string>Anagrafica</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BtnConsegnaMateriale_4">
+   <widget class="QPushButton" name="btnStatistiche">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -136,17 +136,30 @@
      <string>Statistiche</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BtnConsegnaMateriale_5">
+   <widget class="QPushButton" name="btnImpostazioni">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>370</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Impostazioni</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnRichieste">
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>350</y>
+      <y>110</y>
       <width>191</width>
       <height>111</height>
      </rect>
     </property>
     <property name="text">
-     <string>Impostazioni</string>
+     <string>Gestione Richieste</string>
     </property>
    </widget>
   </widget>
