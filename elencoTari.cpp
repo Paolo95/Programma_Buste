@@ -1,11 +1,22 @@
 #include "elencotari.h"
 #include "ui_elencotari.h"
 
-ElencoTari::ElencoTari(QWidget *parent) :
+ElencoTari::ElencoTari(Consegna_Materiale* m, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ElencoTari)
 {
     ui->setupUi(this);
+    n=m;
+    if(n->ui->rBtnPrivato->isChecked()){
+        ui->rBtnElencoPrivato->setChecked(true);
+        ui->rBtnElencoPrivato->setEnabled(false);
+        ui->rBtnElencoAziende->setEnabled(false);
+    }else if (n->ui->rBtnAzienda->isChecked()){
+        ui->rBtnElencoAziende->setChecked(true);
+        ui->rBtnElencoPrivato->setEnabled(false);
+        ui->rBtnElencoAziende->setEnabled(false);
+    }
+
 }
 
 ElencoTari::~ElencoTari()
@@ -51,5 +62,40 @@ void ElencoTari::on_btnCerca_clicked(){
         ui->tblElencoTari->resizeColumnsToContents();
         db->closeConnection();
     }
+}
+
+void ElencoTari::on_btnElencoPassa_clicked(){
+
+    if (ui->tblElencoTari->selectionModel()->currentIndex().row()==-1){
+        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+    }else{
+            if (ui->rBtnElencoPrivato->isChecked()){
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),0,QModelIndex());
+                cognome = ui->tblElencoTari->model()->data(index).toString();
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),1,QModelIndex());
+                nome = ui->tblElencoTari->model()->data(index).toString();
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),2,QModelIndex());
+                via = ui->tblElencoTari->model()->data(index).toString();
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),3,QModelIndex());
+                civico = ui->tblElencoTari->model()->data(index).toString();
+                this->hide();
+                QObject::connect(this , SIGNAL( mandaValoriPrivato(QString,QString,QString,QString) ), n , SLOT(setValoriPrivato(QString,QString,QString,QString)));
+                emit mandaValoriPrivato(cognome,nome,via,civico);
+                QObject::disconnect(this , SIGNAL( mandaValoriPrivato(QString,QString,QString,QString) ), n , SLOT(setValoriPrivato(QString,QString,QString,QString)));
+            }else if (ui->rBtnElencoAziende->isChecked()){
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),0,QModelIndex());
+                ragioneSociale = ui->tblElencoTari->model()->data(index).toString();
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),1,QModelIndex());
+                via = ui->tblElencoTari->model()->data(index).toString();
+                index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),2,QModelIndex());
+                civico = ui->tblElencoTari->model()->data(index).toString();
+                this->hide();
+                QObject::connect(this , SIGNAL( mandaValoriAzienda(QString,QString,QString) ), n , SLOT(setValoriAzienda(QString,QString,QString)));
+                emit mandaValoriAzienda(ragioneSociale,via,civico);
+                QObject::disconnect(this , SIGNAL( mandaValoriAzienda(QString,QString,QString) ), n , SLOT(setValoriAzienda(QString,QString,QString)));
+             }
+    }
+
+
 }
 

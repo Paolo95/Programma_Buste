@@ -33,6 +33,7 @@ public:
     QComboBox *comboBoxLettera;
     QLabel *lblLettera;
     QPushButton *btnCerca;
+    QPushButton *btnElencoPassa;
 
     void setupUi(QDialog *ElencoTari)
     {
@@ -92,6 +93,9 @@ public:
         btnCerca = new QPushButton(ElencoTari);
         btnCerca->setObjectName(QStringLiteral("btnCerca"));
         btnCerca->setGeometry(QRect(620, 30, 89, 25));
+        btnElencoPassa = new QPushButton(ElencoTari);
+        btnElencoPassa->setObjectName(QStringLiteral("btnElencoPassa"));
+        btnElencoPassa->setGeometry(QRect(460, 470, 171, 23));
 
         retranslateUi(ElencoTari);
 
@@ -134,6 +138,7 @@ public:
 
         lblLettera->setText(QApplication::translate("ElencoTari", "Mostra elenco per lettera:", nullptr));
         btnCerca->setText(QApplication::translate("ElencoTari", "Cerca", nullptr));
+        btnElencoPassa->setText(QApplication::translate("ElencoTari", "Passa a consegna", nullptr));
     } // retranslateUi
 
 };

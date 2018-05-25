@@ -12,6 +12,7 @@ Consegna_Materiale::Consegna_Materiale(QWidget *parent) :
     ui->lblDataUltimaRichiestaDb->setVisible(false);
     ui->cmdLinkBtnVerifica->setEnabled(false);
     ui->btnSalva->setEnabled(false);
+    ui->BtnElenco->setEnabled(false);
     ui->txtCognome->setEnabled(false);
     ui->txtNome->setEnabled(false);
     ui->txtRagioneSociale->setEnabled(false);
@@ -153,6 +154,11 @@ void Consegna_Materiale::on_BtnCerca_clicked()
 
 void Consegna_Materiale::on_rBtnPrivato_clicked()
 {
+    model=new QSqlQueryModel();
+    model->clear();
+    ui->lblDataUltimaRichiestaDb->clear();
+    ui->tblRicerca->setModel(model);
+    ui->BtnElenco->setEnabled(true);
     ui->txtCognome->clear();
     ui->txtNome->clear();
     ui->txtVia->clear();
@@ -169,6 +175,11 @@ void Consegna_Materiale::on_rBtnPrivato_clicked()
 
 void Consegna_Materiale::on_rBtnAzienda_clicked()
 {
+    model=new QSqlQueryModel();
+    model->clear();
+    ui->lblDataUltimaRichiestaDb->clear();
+    ui->tblRicerca->setModel(model);
+    ui->BtnElenco->setEnabled(true);
     ui->txtCognome->clear();
     ui->txtNome->clear();
     ui->txtVia->clear();
@@ -185,7 +196,7 @@ void Consegna_Materiale::on_rBtnAzienda_clicked()
 
 void Consegna_Materiale::on_BtnElenco_clicked()
 {
-    ElencoTari *elencoTari = new ElencoTari(this);
+    ElencoTari *elencoTari = new ElencoTari(this,this);
     elencoTari->show();
 }
 
@@ -338,4 +349,23 @@ void Consegna_Materiale::on_btnSalva_clicked()
             ui->txtCivico->clear();
         }
     }
+}
+
+void Consegna_Materiale::setValoriPrivato(QString setCognome,QString setNome,QString setVia,QString setCivico){
+    ui->txtCognome->setText(setCognome);
+    ui->txtNome->setText(setNome);
+    ui->txtVia->setText(setVia);
+    ui->txtCivico->setText(setCivico);
+    this->on_BtnCerca_clicked();
+    ui->tblRicerca->selectRow(0);
+    this->on_cmdLinkBtnVerifica_clicked();
+}
+
+void Consegna_Materiale::setValoriAzienda(QString setRagioneSociale,QString setVia,QString setCivico){
+    ui->txtRagioneSociale->setText(setRagioneSociale);
+    ui->txtVia->setText(setVia);
+    ui->txtCivico->setText(setCivico);
+    this->on_BtnCerca_clicked();
+    ui->tblRicerca->selectRow(0);
+    this->on_cmdLinkBtnVerifica_clicked();
 }

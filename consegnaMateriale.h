@@ -22,7 +22,12 @@ class Consegna_Materiale : public QMainWindow
 
 public:
     explicit Consegna_Materiale(QWidget *parent = 0);
+    Ui::Consegna_Materiale *ui;
     ~Consegna_Materiale();
+
+public slots:
+    void setValoriPrivato(QString,QString,QString,QString);
+    void setValoriAzienda(QString,QString,QString);
 
 private slots:
     void on_BtnMaterialeEsci_clicked();
@@ -42,7 +47,7 @@ private slots:
     void on_tblRicerca_clicked(const QModelIndex &index);
 
 private:
-    Ui::Consegna_Materiale *ui;
+
     void closeEvent (QCloseEvent *event);
     string ragioneSociale;
     string cognome;
