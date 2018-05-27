@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include "consegnaMateriale.h"
+#include "gestioneRichieste.h"
 
 namespace Ui {
 class MainMenu;
@@ -21,6 +22,8 @@ private slots:
     void on_BtnMenuEsci_clicked();
     void on_BtnMenuLogin_clicked();
     void on_BtnConsegnaMateriale_clicked();
+
+    void on_btnGestioneRichieste_clicked();
 
 private:
     Ui::MainMenu *ui;

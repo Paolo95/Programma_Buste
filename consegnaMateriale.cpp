@@ -18,9 +18,6 @@ Consegna_Materiale::Consegna_Materiale(QWidget *parent) :
     ui->txtRagioneSociale->setEnabled(false);
     ui->txtCivico->setEnabled(false);
     ui->txtVia->setEnabled(false);
-    db = new DbConnect();
-    db->openConnection();
-    db->closeConnection();
 }
 
 Consegna_Materiale::~Consegna_Materiale()

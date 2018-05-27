@@ -149,7 +149,7 @@
      <string>Impostazioni</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnRichieste">
+   <widget class="QPushButton" name="btnGestioneRichieste">
     <property name="geometry">
      <rect>
       <x>210</x>

@@ -68,3 +68,10 @@ void MainMenu::on_BtnConsegnaMateriale_clicked()
 }
 
 
+
+void MainMenu::on_btnGestioneRichieste_clicked()
+{
+    this->hide();
+    GestioneRichieste *gestione= new GestioneRichieste(this);
+    gestione->show();
+}

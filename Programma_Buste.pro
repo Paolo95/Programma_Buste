@@ -32,7 +32,8 @@ SOURCES += \
     consegnaMateriale.cpp \
     dbConnect.cpp \
     mainMenu.cpp \
-    elencoTari.cpp
+    elencoTari.cpp \
+    gestioneRichieste.cpp
 
 HEADERS += \
         login.h \
@@ -40,7 +41,8 @@ HEADERS += \
     dbconnect.h \
     consegnaMateriale.h \
     mainMenu.h \
-    elencotari.h
+    elencotari.h \
+    gestioneRichieste.h
 
 FORMS += \
         login.ui \
@@ -48,4 +50,5 @@ FORMS += \
     consegnaMateriale.ui \
     mainMenu.ui \
     elencoTari.ui \
-    elencotari.ui
+    elencotari.ui \
+    gestioneRichieste.ui

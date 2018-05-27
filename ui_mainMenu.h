@@ -36,7 +36,7 @@ public:
     QPushButton *btnAnagrafica;
     QPushButton *btnStatistiche;
     QPushButton *btnImpostazioni;
-    QPushButton *btnRichieste;
+    QPushButton *btnGestioneRichieste;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -82,9 +82,9 @@ public:
         btnImpostazioni = new QPushButton(centralwidget);
         btnImpostazioni->setObjectName(QStringLiteral("btnImpostazioni"));
         btnImpostazioni->setGeometry(QRect(580, 370, 191, 41));
-        btnRichieste = new QPushButton(centralwidget);
-        btnRichieste->setObjectName(QStringLiteral("btnRichieste"));
-        btnRichieste->setGeometry(QRect(210, 110, 191, 111));
+        btnGestioneRichieste = new QPushButton(centralwidget);
+        btnGestioneRichieste->setObjectName(QStringLiteral("btnGestioneRichieste"));
+        btnGestioneRichieste->setGeometry(QRect(210, 110, 191, 111));
         MainMenu->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainMenu);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -110,7 +110,7 @@ public:
         btnAnagrafica->setText(QApplication::translate("MainMenu", "Anagrafica", nullptr));
         btnStatistiche->setText(QApplication::translate("MainMenu", "Statistiche", nullptr));
         btnImpostazioni->setText(QApplication::translate("MainMenu", "Impostazioni", nullptr));
-        btnRichieste->setText(QApplication::translate("MainMenu", "Gestione Richieste", nullptr));
+        btnGestioneRichieste->setText(QApplication::translate("MainMenu", "Gestione Richieste", nullptr));
     } // retranslateUi
 
 };

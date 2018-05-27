@@ -48,7 +48,7 @@ private slots:
 
 private:
 
-    void closeEvent (QCloseEvent *event);
+    void closeEvent (QCloseEvent *);
     string ragioneSociale;
     string cognome;
     string nome;
