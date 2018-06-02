@@ -127,7 +127,7 @@ public:
         txtNome->setGeometry(QRect(390, 70, 211, 20));
         lblRagioneSociale = new QLabel(grpRicercaCittadino);
         lblRagioneSociale->setObjectName(QStringLiteral("lblRagioneSociale"));
-        lblRagioneSociale->setGeometry(QRect(10, 40, 111, 16));
+        lblRagioneSociale->setGeometry(QRect(10, 30, 111, 41));
         txtRagioneSociale = new QLineEdit(grpRicercaCittadino);
         txtRagioneSociale->setObjectName(QStringLiteral("txtRagioneSociale"));
         txtRagioneSociale->setGeometry(QRect(120, 40, 211, 20));

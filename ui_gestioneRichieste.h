@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCommandLinkButton>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -47,17 +48,18 @@ public:
     QTableView *tblRicercaCittadino;
     QTableView *tblRicercaRichieste;
     QLabel *lblElencoRichieste;
+    QCommandLinkButton *cmdLinkBtnTrova;
 
     void setupUi(QMainWindow *GestioneRichieste)
     {
         if (GestioneRichieste->objectName().isEmpty())
             GestioneRichieste->setObjectName(QStringLiteral("GestioneRichieste"));
-        GestioneRichieste->resize(800, 600);
+        GestioneRichieste->resize(800, 609);
         centralwidget = new QWidget(GestioneRichieste);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         btnRichiesteEsci = new QPushButton(centralwidget);
         btnRichiesteEsci->setObjectName(QStringLiteral("btnRichiesteEsci"));
-        btnRichiesteEsci->setGeometry(QRect(720, 550, 71, 25));
+        btnRichiesteEsci->setGeometry(QRect(720, 570, 71, 25));
         grpRicercaCittadino = new QGroupBox(centralwidget);
         grpRicercaCittadino->setObjectName(QStringLiteral("grpRicercaCittadino"));
         grpRicercaCittadino->setGeometry(QRect(10, 10, 611, 161));
@@ -90,7 +92,7 @@ public:
         txtNome->setGeometry(QRect(390, 70, 211, 20));
         lblRagioneSociale = new QLabel(grpRicercaCittadino);
         lblRagioneSociale->setObjectName(QStringLiteral("lblRagioneSociale"));
-        lblRagioneSociale->setGeometry(QRect(10, 40, 111, 16));
+        lblRagioneSociale->setGeometry(QRect(10, 30, 111, 41));
         txtRagioneSociale = new QLineEdit(grpRicercaCittadino);
         txtRagioneSociale->setObjectName(QStringLiteral("txtRagioneSociale"));
         txtRagioneSociale->setGeometry(QRect(120, 40, 211, 20));
@@ -109,7 +111,8 @@ public:
         tblRicercaCittadino->verticalHeader()->setVisible(false);
         tblRicercaRichieste = new QTableView(centralwidget);
         tblRicercaRichieste->setObjectName(QStringLiteral("tblRicercaRichieste"));
-        tblRicercaRichieste->setGeometry(QRect(10, 340, 781, 111));
+        tblRicercaRichieste->setGeometry(QRect(10, 340, 781, 131));
+        tblRicercaRichieste->setEditTriggers(QAbstractItemView::DoubleClicked);
         tblRicercaRichieste->setSelectionMode(QAbstractItemView::SingleSelection);
         tblRicercaRichieste->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblRicercaRichieste->setGridStyle(Qt::SolidLine);
@@ -117,6 +120,9 @@ public:
         lblElencoRichieste = new QLabel(centralwidget);
         lblElencoRichieste->setObjectName(QStringLiteral("lblElencoRichieste"));
         lblElencoRichieste->setGeometry(QRect(10, 310, 121, 17));
+        cmdLinkBtnTrova = new QCommandLinkButton(centralwidget);
+        cmdLinkBtnTrova->setObjectName(QStringLiteral("cmdLinkBtnTrova"));
+        cmdLinkBtnTrova->setGeometry(QRect(670, 300, 121, 41));
         GestioneRichieste->setCentralWidget(centralwidget);
 
         retranslateUi(GestioneRichieste);
@@ -138,6 +144,7 @@ public:
         rBtnPrivato->setText(QApplication::translate("GestioneRichieste", "Privato", nullptr));
         rBtnAzienda->setText(QApplication::translate("GestioneRichieste", "Azienda", nullptr));
         lblElencoRichieste->setText(QApplication::translate("GestioneRichieste", "Elenco richieste :", nullptr));
+        cmdLinkBtnTrova->setText(QApplication::translate("GestioneRichieste", "Trova richieste", nullptr));
     } // retranslateUi
 
 };

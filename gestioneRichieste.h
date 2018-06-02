@@ -25,6 +25,7 @@ private slots:
 
     void on_rBtnAzienda_clicked();
 
+    void on_cmdLinkBtnTrova_clicked();
 
 private:
     Ui::GestioneRichieste *ui;
@@ -43,6 +44,7 @@ private:
     QMessageBox MessageExitGestioneRichieste;
     QAbstractButton *BtnSiGestioneRichieste;
     QAbstractButton *BtnNoGestioneRichieste;
+    QModelIndex index;
 };
 
 #endif // GESTIONERICHIESTE_H

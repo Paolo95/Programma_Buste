@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>609</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>720</x>
-      <y>550</y>
+      <y>570</y>
       <width>71</width>
       <height>25</height>
      </rect>
@@ -148,9 +148,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>40</y>
+       <y>30</y>
        <width>111</width>
-       <height>16</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
@@ -222,8 +222,11 @@
       <x>10</x>
       <y>340</y>
       <width>781</width>
-      <height>111</height>
+      <height>131</height>
      </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::DoubleClicked</set>
     </property>
     <property name="selectionMode">
      <enum>QAbstractItemView::SingleSelection</enum>
@@ -249,6 +252,19 @@
     </property>
     <property name="text">
      <string>Elenco richieste :</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="cmdLinkBtnTrova">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>300</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Trova richieste</string>
     </property>
    </widget>
   </widget>

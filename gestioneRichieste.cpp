@@ -11,6 +11,7 @@ GestioneRichieste::GestioneRichieste(QWidget *parent) :
     ui->txtRagioneSociale->setEnabled(false);
     ui->txtCivico->setEnabled(false);
     ui->txtVia->setEnabled(false);
+    ui->cmdLinkBtnTrova->setEnabled(false);
 }
 
 GestioneRichieste::~GestioneRichieste()
@@ -50,6 +51,7 @@ void GestioneRichieste::on_btnRichiesteEsci_clicked()
 
 void GestioneRichieste::on_BtnCerca_clicked()
 {
+    ui->cmdLinkBtnTrova->setEnabled(true);
     ragioneSociale=ui->txtRagioneSociale->text().toStdString();
     cognome=ui->txtCognome->text().toStdString();
     nome=ui->txtNome->text().toStdString();
@@ -172,3 +174,78 @@ void GestioneRichieste::on_rBtnAzienda_clicked()
     ui->txtCivico->setEnabled(true);
     ui->txtVia->setEnabled(true);
 }
+
+void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
+{
+    if (ui->tblRicercaCittadino->selectionModel()->currentIndex().row()==-1){
+        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+    }else{
+            if (ui->rBtnPrivato->isChecked()){
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),0,QModelIndex());
+                cognome = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),1,QModelIndex());
+                nome = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),2,QModelIndex());
+                via = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),3,QModelIndex());
+                civico = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+            }else if (ui->rBtnAzienda->isChecked()){
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),0,QModelIndex());
+                ragioneSociale = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),1,QModelIndex());
+                via = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),2,QModelIndex());
+                civico = ui->tblRicercaCittadino->model()->data(index).toString().toStdString();
+             }
+
+    db = new DbConnect();
+    db->openConnection();
+
+    if (ui->rBtnPrivato->isChecked()){
+    stringQuery="SELECT data_richiesta, r.n_rosse, r.n_blu, r.n_verdi, r.n_bianche, r.n_calendari, r.n_mastelli_umido, r.n_mastelli_vetro "
+                "FROM richiesta r, cliente c "
+                "WHERE c.id_cliente=r.cliente AND c.cognome='"+cognome+"' AND c.nome='"+nome+"' AND c.via='"+via+"' AND c.n_civico='"+civico+"' "
+                "ORDER BY data_richiesta DESC";
+    }else if (ui->rBtnAzienda->isChecked()){
+        stringQuery="SELECT data_richiesta, r.n_rosse, r.n_blu, r.n_verdi, r.n_bianche, r.n_calendari, r.n_secchi_1100, r.n_secchi_240 "
+                    "FROM richiesta r, cliente c "
+                    "WHERE c.id_cliente=r.cliente AND c.ragione_sociale='"+ragioneSociale+"' AND c.via='"+via+"' AND c.n_civico='"+civico+"'"
+                    "ORDER BY data_richiesta DESC";
+    }
+    query = db->executeQuery(QString::fromStdString(stringQuery));
+    if (query.size()==0){
+        error.information(0,"Info","Il cliente non ha mai effetuato una richiesta!");
+    }else
+        {
+            model=new QSqlQueryModel();
+            if (ui->rBtnPrivato->isChecked() ){
+                model->setHeaderData(0,Qt::Horizontal,"DATA");
+                model->setHeaderData(1,Qt::Horizontal,"ROSSE");
+                model->setHeaderData(2,Qt::Horizontal,"BLU");
+                model->setHeaderData(3,Qt::Horizontal,"VERDI");
+                model->setHeaderData(4,Qt::Horizontal,"BIANCHE");
+                model->setHeaderData(5,Qt::Horizontal,"CALENDARI");
+                model->setHeaderData(6,Qt::Horizontal,"MASTELLI UMIDO");
+                model->setHeaderData(7,Qt::Horizontal,"MASTELLI VETRO");
+            }else if (ui->rBtnAzienda->isChecked() ){
+                model->setHeaderData(0,Qt::Horizontal,"DATA");
+                model->setHeaderData(1,Qt::Horizontal,"ROSSE");
+                model->setHeaderData(2,Qt::Horizontal,"BLU");
+                model->setHeaderData(3,Qt::Horizontal,"VERDI");
+                model->setHeaderData(4,Qt::Horizontal,"BIANCHE");
+                model->setHeaderData(5,Qt::Horizontal,"CALENDARI");
+                model->setHeaderData(6,Qt::Horizontal,"SECCHI 1100");
+                model->setHeaderData(7,Qt::Horizontal,"SECCHI 240");
+            }
+
+           ui->tblRicercaRichieste->setModel(model);
+           ui->tblRicercaRichieste->resizeColumnsToContents();
+
+    }
+
+    query.clear();
+    db->closeConnection();
+
+    }
+}
+
