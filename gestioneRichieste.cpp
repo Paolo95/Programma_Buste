@@ -11,7 +11,9 @@ GestioneRichieste::GestioneRichieste(QWidget *parent) :
     ui->txtRagioneSociale->setEnabled(false);
     ui->txtCivico->setEnabled(false);
     ui->txtVia->setEnabled(false);
+    ui->cmdLinkBtnModifica->setEnabled(false);
     ui->cmdLinkBtnTrova->setEnabled(false);
+    ui->cmdLinkBtnElimina->setEnabled(false);
 }
 
 GestioneRichieste::~GestioneRichieste()
@@ -43,6 +45,8 @@ void GestioneRichieste::on_btnRichiesteEsci_clicked()
             menu->show();
           }else{
             MessageExitGestioneRichieste.removeButton(BtnSiGestioneRichieste);
+            MessageExitGestioneRichieste.removeButton(BtnSiGestioneRichieste);
+            MessageExitGestioneRichieste.removeButton(BtnNoGestioneRichieste);
             MessageExitGestioneRichieste.removeButton(BtnNoGestioneRichieste);
             MessageExitGestioneRichieste.close();
 
@@ -146,6 +150,7 @@ void GestioneRichieste::on_rBtnPrivato_clicked()
     model=new QSqlQueryModel();
     model->clear();
     ui->tblRicercaCittadino->setModel(model);
+    ui->tblRicercaRichieste->setModel(model);
     ui->txtCognome->clear();
     ui->txtNome->clear();
     ui->txtVia->clear();
@@ -163,6 +168,7 @@ void GestioneRichieste::on_rBtnAzienda_clicked()
     model=new QSqlQueryModel();
     model->clear();
     ui->tblRicercaCittadino->setModel(model);
+    ui->tblRicercaRichieste->setModel(model);
     ui->txtCognome->clear();
     ui->txtNome->clear();
     ui->txtVia->clear();
@@ -177,6 +183,8 @@ void GestioneRichieste::on_rBtnAzienda_clicked()
 
 void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
 {
+    ui->cmdLinkBtnModifica->setEnabled(true);
+    ui->cmdLinkBtnElimina->setEnabled(true);
     if (ui->tblRicercaCittadino->selectionModel()->currentIndex().row()==-1){
         error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
     }else{
@@ -218,6 +226,7 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
     }else
         {
             model=new QSqlQueryModel();
+            model->setQuery(query);
             if (ui->rBtnPrivato->isChecked() ){
                 model->setHeaderData(0,Qt::Horizontal,"DATA");
                 model->setHeaderData(1,Qt::Horizontal,"ROSSE");
@@ -249,3 +258,114 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
     }
 }
 
+
+void GestioneRichieste::on_cmdLinkBtnModifica_clicked()
+{
+    if (ui->tblRicercaRichieste->selectionModel()->currentIndex().row()==-1){
+        error.information(0,"Attenzione!","Devi selezionare una richiesta dalla lista!");
+    }else{
+            if (ui->rBtnPrivato->isChecked()){
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),0,QModelIndex());
+                dataRichiesta = ui->tblRicercaRichieste->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),1,QModelIndex());
+                nRosse = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),2,QModelIndex());
+                nBlu = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),3,QModelIndex());
+                nVerdi = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),4,QModelIndex());
+                nBianche = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),5,QModelIndex());
+                nCalendari = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),6,QModelIndex());
+                nMastelliUmido = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),7,QModelIndex());
+                nMastelliVetro = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                ModificaRichiesta *modifica = new ModificaRichiesta(this,this);
+                modifica->show();
+            }else if (ui->rBtnAzienda->isChecked()){
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),0,QModelIndex());
+                dataRichiesta = ui->tblRicercaRichieste->model()->data(index).toString().toStdString();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),1,QModelIndex());
+                nRosse = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),2,QModelIndex());
+                nBlu = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),3,QModelIndex());
+                nVerdi = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),4,QModelIndex());
+                nBianche = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),5,QModelIndex());
+                nCalendari = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),6,QModelIndex());
+                nSecchi1100 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),7,QModelIndex());
+                nSecchi240 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                ModificaRichiesta *modifica = new ModificaRichiesta(this,this);
+                modifica->show();
+             }
+    }    
+}
+
+void GestioneRichieste::refreshRichieste(){
+    this->on_cmdLinkBtnTrova_clicked();
+}
+
+void GestioneRichieste::on_cmdLinkBtnElimina_clicked()
+{
+    if (ui->tblRicercaRichieste->selectionModel()->currentIndex().row()==-1){
+        error.information(0,"Attenzione!","Devi selezionare una richiesta dalla lista!");
+    }else{
+    db = new DbConnect();
+    db->openConnection();
+
+    index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),0,QModelIndex());
+    dataRichiesta = ui->tblRicercaRichieste->model()->data(index).toString().toStdString();
+
+    MessageExitGestioneRichieste.setWindowTitle("Vuoi procedere?");
+    MessageExitGestioneRichieste.setText("Sei sicuro di voler eliminare la richiesta?");
+    MessageExitGestioneRichieste.setIcon(QMessageBox::Information);
+    BtnSiGestioneRichieste = MessageExitGestioneRichieste.addButton(QObject::tr("Si"), QMessageBox::YesRole);
+    BtnNoGestioneRichieste = MessageExitGestioneRichieste.addButton(QObject::tr("No"), QMessageBox::NoRole);
+    MessageExitGestioneRichieste.exec();
+
+    if (ui->rBtnPrivato->isChecked()){
+        stringQuery="SELECT id_cliente "
+                "FROM cliente "
+                "WHERE cognome='"+cognome+"' AND nome='"+nome+"' AND via='"+via+"' AND n_civico='"+civico+"' ";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
+        query.next();
+        codiceCliente=query.value(0).toUInt();
+        query.clear();
+
+    }else if (ui->rBtnAzienda->isChecked()){
+        stringQuery="SELECT id_cliente "
+                    "FROM cliente "
+                    "WHERE ragione_sociale='"+ragioneSociale+"' AND via='"+via+"' AND n_civico='"+civico+"'";
+        query = db->executeQuery(QString::fromStdString(stringQuery));
+        query.next();
+        codiceCliente=query.value(0).toUInt();
+        query.clear();
+    }
+
+    if (MessageExitGestioneRichieste.clickedButton()==BtnSiGestioneRichieste){
+          MessageExitGestioneRichieste.close();
+            stringQuery="DELETE FROM richiesta "
+                        "WHERE data_richiesta='"+dataRichiesta+"' AND cliente="+to_string(codiceCliente)+" ";
+            query = db->executeQuery(QString::fromStdString(stringQuery));
+            query.clear();
+            model=new QSqlQueryModel();
+            model->clear();
+            ui->tblRicercaRichieste->setModel(model);
+            this->on_cmdLinkBtnTrova_clicked();
+            MessageExitGestioneRichieste.removeButton(BtnSiGestioneRichieste);
+            MessageExitGestioneRichieste.removeButton(BtnNoGestioneRichieste);
+          }else{
+            MessageExitGestioneRichieste.removeButton(BtnSiGestioneRichieste);
+            MessageExitGestioneRichieste.removeButton(BtnNoGestioneRichieste);
+            MessageExitGestioneRichieste.close();
+
+          }
+    }
+    db->closeConnection();
+
+}

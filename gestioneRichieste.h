@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "mainMenu.h"
+#include "modificaRichiesta.h"
 
 namespace Ui {
 class GestioneRichieste;
@@ -14,7 +15,27 @@ class GestioneRichieste : public QMainWindow
 
 public:
     explicit GestioneRichieste(QWidget *parent = 0);
+    Ui::GestioneRichieste *ui;
+    string dataRichiesta;
+    unsigned int nRosse;
+    unsigned int nBlu;
+    unsigned int nVerdi;
+    unsigned int nBianche;
+    unsigned int nCalendari;
+    unsigned int nMastelliUmido;
+    unsigned int nMastelliVetro;
+    unsigned int nSecchi240;
+    unsigned int nSecchi1100;
+    string ragioneSociale;
+    string cognome;
+    string nome;
+    string via;
+    string civico;
+    string tipologia;
     ~GestioneRichieste();
+
+public slots:
+    void refreshRichieste();
 
 private slots:
     void on_btnRichiesteEsci_clicked();
@@ -27,15 +48,12 @@ private slots:
 
     void on_cmdLinkBtnTrova_clicked();
 
+    void on_cmdLinkBtnModifica_clicked();
+
+    void on_cmdLinkBtnElimina_clicked();
+
 private:
-    Ui::GestioneRichieste *ui;
-    void closeEvent (QCloseEvent *);
-    string ragioneSociale;
-    string cognome;
-    string nome;
-    string via;
-    string civico;
-    string tipologia;
+    void closeEvent (QCloseEvent *);    
     string stringQuery;
     DbConnect *db;
     QSqlQuery query;
@@ -44,6 +62,7 @@ private:
     QMessageBox MessageExitGestioneRichieste;
     QAbstractButton *BtnSiGestioneRichieste;
     QAbstractButton *BtnNoGestioneRichieste;
+    unsigned int codiceCliente;
     QModelIndex index;
 };
 

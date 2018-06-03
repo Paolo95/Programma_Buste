@@ -33,7 +33,8 @@ SOURCES += \
     dbConnect.cpp \
     mainMenu.cpp \
     elencoTari.cpp \
-    gestioneRichieste.cpp
+    gestioneRichieste.cpp \
+    modificaRichiesta.cpp
 
 HEADERS += \
         login.h \
@@ -42,7 +43,8 @@ HEADERS += \
     consegnaMateriale.h \
     mainMenu.h \
     elencotari.h \
-    gestioneRichieste.h
+    gestioneRichieste.h \
+    modificaRichiesta.h
 
 FORMS += \
         login.ui \
@@ -51,4 +53,5 @@ FORMS += \
     mainMenu.ui \
     elencoTari.ui \
     elencotari.ui \
-    gestioneRichieste.ui
+    gestioneRichieste.ui \
+    modificaRichiesta.ui

@@ -49,12 +49,16 @@ public:
     QTableView *tblRicercaRichieste;
     QLabel *lblElencoRichieste;
     QCommandLinkButton *cmdLinkBtnTrova;
+    QCommandLinkButton *cmdLinkBtnModifica;
+    QCommandLinkButton *cmdLinkBtnElimina;
 
     void setupUi(QMainWindow *GestioneRichieste)
     {
         if (GestioneRichieste->objectName().isEmpty())
             GestioneRichieste->setObjectName(QStringLiteral("GestioneRichieste"));
         GestioneRichieste->resize(800, 609);
+        GestioneRichieste->setMinimumSize(QSize(800, 609));
+        GestioneRichieste->setMaximumSize(QSize(800, 609));
         centralwidget = new QWidget(GestioneRichieste);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         btnRichiesteEsci = new QPushButton(centralwidget);
@@ -123,6 +127,12 @@ public:
         cmdLinkBtnTrova = new QCommandLinkButton(centralwidget);
         cmdLinkBtnTrova->setObjectName(QStringLiteral("cmdLinkBtnTrova"));
         cmdLinkBtnTrova->setGeometry(QRect(670, 300, 121, 41));
+        cmdLinkBtnModifica = new QCommandLinkButton(centralwidget);
+        cmdLinkBtnModifica->setObjectName(QStringLiteral("cmdLinkBtnModifica"));
+        cmdLinkBtnModifica->setGeometry(QRect(650, 480, 141, 41));
+        cmdLinkBtnElimina = new QCommandLinkButton(centralwidget);
+        cmdLinkBtnElimina->setObjectName(QStringLiteral("cmdLinkBtnElimina"));
+        cmdLinkBtnElimina->setGeometry(QRect(490, 480, 141, 41));
         GestioneRichieste->setCentralWidget(centralwidget);
 
         retranslateUi(GestioneRichieste);
@@ -145,6 +155,8 @@ public:
         rBtnAzienda->setText(QApplication::translate("GestioneRichieste", "Azienda", nullptr));
         lblElencoRichieste->setText(QApplication::translate("GestioneRichieste", "Elenco richieste :", nullptr));
         cmdLinkBtnTrova->setText(QApplication::translate("GestioneRichieste", "Trova richieste", nullptr));
+        cmdLinkBtnModifica->setText(QApplication::translate("GestioneRichieste", "Modifica richiesta", nullptr));
+        cmdLinkBtnElimina->setText(QApplication::translate("GestioneRichieste", "Elimina richiesta", nullptr));
     } // retranslateUi
 
 };
