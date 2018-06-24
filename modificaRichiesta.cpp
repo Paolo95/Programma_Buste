@@ -10,6 +10,7 @@ ModificaRichiesta::ModificaRichiesta(GestioneRichieste *g,QWidget *parent) :
     dataGestioneQ = QString::fromStdString(f->dataRichiesta);
     dataGestione = QDate::fromString(dataGestioneQ,"yyyy-MM-dd");
     ui->dateEditRichiesta->setDate(dataGestione);
+    ui->btnSalva->setEnabled(false);
 
     if (f->ui->rBtnPrivato->isChecked()){
         ui->grpSecchi->setEnabled(false);
@@ -65,6 +66,7 @@ void ModificaRichiesta::on_comboBoxRosse_currentIndexChanged(int index)
     }else{
         ui->comboBoxRosse->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxBlu_currentIndexChanged(int index)
@@ -74,6 +76,7 @@ void ModificaRichiesta::on_comboBoxBlu_currentIndexChanged(int index)
     }else{
         ui->comboBoxBlu->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxVerdi_currentIndexChanged(int index)
@@ -83,6 +86,7 @@ void ModificaRichiesta::on_comboBoxVerdi_currentIndexChanged(int index)
     }else{
         ui->comboBoxVerdi->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxBianche_currentIndexChanged(int index)
@@ -92,6 +96,7 @@ void ModificaRichiesta::on_comboBoxBianche_currentIndexChanged(int index)
     }else{
         ui->comboBoxBianche->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxCalendari_currentIndexChanged(int index)
@@ -101,6 +106,7 @@ void ModificaRichiesta::on_comboBoxCalendari_currentIndexChanged(int index)
     }else{
         ui->comboBoxCalendari->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxUmido_currentIndexChanged(int index)
@@ -110,6 +116,7 @@ void ModificaRichiesta::on_comboBoxUmido_currentIndexChanged(int index)
     }else{
         ui->comboBoxUmido->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxVetro_currentIndexChanged(int index)
@@ -119,6 +126,7 @@ void ModificaRichiesta::on_comboBoxVetro_currentIndexChanged(int index)
     }else{
         ui->comboBoxVetro->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxSecchi240_currentIndexChanged(int index)
@@ -128,6 +136,7 @@ void ModificaRichiesta::on_comboBoxSecchi240_currentIndexChanged(int index)
     }else{
         ui->comboBoxSecchi240->setStyleSheet("");
     }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_comboBoxSecchi1100_currentIndexChanged(int index)
@@ -137,10 +146,22 @@ void ModificaRichiesta::on_comboBoxSecchi1100_currentIndexChanged(int index)
     }else{
         ui->comboBoxSecchi1100->setStyleSheet("");
     }
+    this->activeButtonModifica();
+}
+
+
+void ModificaRichiesta::on_dateEditRichiesta_userDateChanged(const QDate &date)
+{
+   if(!f->dataRichiesta.compare(date.toString("yyyy-MM-dd").toStdString())){
+        ui->dateEditRichiesta->setStyleSheet("");
+    }else{
+        ui->dateEditRichiesta->setStyleSheet("QDateEdit { background-color: red; }");
+    }
+    this->activeButtonModifica();
 }
 
 void ModificaRichiesta::on_btnSalva_clicked()
-{
+{        
     db = new DbConnect();
     db->openConnection();
 
@@ -203,3 +224,19 @@ void ModificaRichiesta::on_btnSalva_clicked()
 
     error.information(0,"Info","Modifica effettuata con successo!");
 }
+
+
+void ModificaRichiesta::activeButtonModifica (){
+
+   if(ui->comboBoxRosse->styleSheet().isEmpty() && ui->comboBoxBlu->styleSheet().isEmpty() &&
+       ui->comboBoxVerdi->styleSheet().isEmpty() && ui->comboBoxBianche->styleSheet().isEmpty() &&
+       ui->comboBoxCalendari->styleSheet().isEmpty() && ui->comboBoxUmido->styleSheet().isEmpty() &&
+       ui->comboBoxVetro->styleSheet().isEmpty() && ui->comboBoxSecchi240->styleSheet().isEmpty() &&
+       ui->comboBoxSecchi1100->styleSheet().isEmpty() && ui->dateEditRichiesta->styleSheet().isEmpty()){
+        ui->btnSalva->setEnabled(false);
+    }
+        else{
+        ui->btnSalva->setEnabled(true);
+    }
+}
+

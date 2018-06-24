@@ -34,7 +34,8 @@ SOURCES += \
     mainMenu.cpp \
     elencoTari.cpp \
     gestioneRichieste.cpp \
-    modificaRichiesta.cpp
+    modificaRichiesta.cpp \
+    gestioneAnagrafica.cpp
 
 HEADERS += \
         login.h \
@@ -44,7 +45,8 @@ HEADERS += \
     mainMenu.h \
     elencotari.h \
     gestioneRichieste.h \
-    modificaRichiesta.h
+    modificaRichiesta.h \
+    gestioneAnagrafica.h
 
 FORMS += \
         login.ui \
@@ -54,4 +56,5 @@ FORMS += \
     elencoTari.ui \
     elencotari.ui \
     gestioneRichieste.ui \
-    modificaRichiesta.ui
+    modificaRichiesta.ui \
+    gestioneAnagrafica.ui

@@ -42,6 +42,8 @@ private slots:
 
     void on_btnSalva_clicked();
 
+    void on_dateEditRichiesta_userDateChanged(const QDate &date);
+
 private:
     Ui::ModificaRichiesta *ui;
     GestioneRichieste *f;
@@ -55,6 +57,7 @@ private:
     unsigned int codiceCliente;
     QSqlQuery query;
     QMessageBox error;
+    void activeButtonModifica();
 };
 
 #endif // MODIFICARICHIESTA_H
