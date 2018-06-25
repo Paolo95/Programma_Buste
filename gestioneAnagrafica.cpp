@@ -314,26 +314,36 @@ void GestioneAnagrafica::on_cmdLinkBtnElimina_clicked()
             stringQuery="DELETE FROM cliente "
                         "WHERE id_cliente="+to_string(codiceCliente)+" ";
             query = db->executeQuery(QString::fromStdString(stringQuery));
-                query.clear();
-                model=new QSqlQueryModel();
-                model->clear();
-                ui->tblRicerca->setModel(model);
                 MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
                 MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
-                ui->txtCognome->clear();
-                ui->txtNome->clear();
-                ui->txtRagioneSociale->clear();
-                ui->txtCivico->clear();
-                ui->txtVia->clear();
-                ui->cmdLinkBtnElimina->setEnabled(false);
-                ui->cmdLinkBtnModifica->setEnabled(false);
-                error.information(0,"Info","Cittadino eliminato correttamente!");
           }else{
             MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
             MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
             MessageExitGestioneAnagrafica.close();
           }
     }
+    if (query.isValid()==0){
+        if (query.lastError().nativeErrorCode().toInt()==1451){
+            error.critical(0,"Errore!","Non è possibile effettuare l'operazione.\n\nCodice errore database: "
+                           +query.lastError().nativeErrorCode()+"\nIl cittadino ha delle richieste associate! "
+                           "Eliminare tutte le richieste effettuate prima di eliminare il cittadino!");
+            query.clear();
+        }
+    }else{
+        query.clear();
+        error.information(0,"Info","Cittadino eliminato correttamente!");
+        model=new QSqlQueryModel();
+        model->clear();
+        ui->tblRicerca->setModel(model);
+        ui->txtCognome->clear();
+        ui->txtNome->clear();
+        ui->txtRagioneSociale->clear();
+        ui->txtCivico->clear();
+        ui->txtVia->clear();
+        ui->cmdLinkBtnElimina->setEnabled(false);
+        ui->cmdLinkBtnModifica->setEnabled(false);
+    }
+
     db->closeConnection();
 }
 

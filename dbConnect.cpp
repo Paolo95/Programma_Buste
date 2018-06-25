@@ -40,6 +40,7 @@ QSqlQuery DbConnect::executeQuery(QString stringQuery)
 
 QSqlError DbConnect::lastError(){
     return db.lastError();
+
 }
 
 
