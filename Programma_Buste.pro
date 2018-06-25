@@ -54,7 +54,6 @@ FORMS += \
     consegnaMateriale.ui \
     mainMenu.ui \
     elencoTari.ui \
-    elencotari.ui \
     gestioneRichieste.ui \
     modificaRichiesta.ui \
     gestioneAnagrafica.ui

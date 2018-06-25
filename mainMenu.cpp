@@ -72,6 +72,13 @@ void MainMenu::on_BtnConsegnaMateriale_clicked()
 void MainMenu::on_btnGestioneRichieste_clicked()
 {
     this->hide();
-    GestioneRichieste *gestione= new GestioneRichieste(this);
-    gestione->show();
+    GestioneRichieste *richieste= new GestioneRichieste(this);
+    richieste->show();
+}
+
+void MainMenu::on_btnAnagrafica_clicked()
+{
+    this->hide();
+    GestioneAnagrafica *anagrafica = new GestioneAnagrafica(this);
+    anagrafica->show();
 }

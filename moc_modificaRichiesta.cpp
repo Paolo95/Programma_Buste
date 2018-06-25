@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ModificaRichiesta_t {
-    QByteArrayData data[18];
-    char stringdata0[508];
+    QByteArrayData data[17];
+    char stringdata0[475];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,9 +46,8 @@ QT_MOC_LITERAL(11, 293, 36), // "on_comboBoxVetro_currentIndex..."
 QT_MOC_LITERAL(12, 330, 40), // "on_comboBoxSecchi240_currentI..."
 QT_MOC_LITERAL(13, 371, 41), // "on_comboBoxSecchi1100_current..."
 QT_MOC_LITERAL(14, 413, 19), // "on_btnSalva_clicked"
-QT_MOC_LITERAL(15, 433, 32), // "on_dateEditRichiesta_dateChanged"
-QT_MOC_LITERAL(16, 466, 4), // "date"
-QT_MOC_LITERAL(17, 471, 36) // "on_dateEditRichiesta_userDate..."
+QT_MOC_LITERAL(15, 433, 36), // "on_dateEditRichiesta_userDate..."
+QT_MOC_LITERAL(16, 470, 4) // "date"
 
     },
     "ModificaRichiesta\0mandaModifica\0\0"
@@ -63,8 +62,8 @@ QT_MOC_LITERAL(17, 471, 36) // "on_dateEditRichiesta_userDate..."
     "on_comboBoxSecchi240_currentIndexChanged\0"
     "on_comboBoxSecchi1100_currentIndexChanged\0"
     "on_btnSalva_clicked\0"
-    "on_dateEditRichiesta_dateChanged\0date\0"
-    "on_dateEditRichiesta_userDateChanged"
+    "on_dateEditRichiesta_userDateChanged\0"
+    "date"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +73,7 @@ static const uint qt_meta_data_ModificaRichiesta[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -82,22 +81,21 @@ static const uint qt_meta_data_ModificaRichiesta[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   84,    2, 0x06 /* Public */,
+       1,    0,   79,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   85,    2, 0x08 /* Private */,
-       4,    1,   86,    2, 0x08 /* Private */,
-       6,    1,   89,    2, 0x08 /* Private */,
-       7,    1,   92,    2, 0x08 /* Private */,
-       8,    1,   95,    2, 0x08 /* Private */,
-       9,    1,   98,    2, 0x08 /* Private */,
-      10,    1,  101,    2, 0x08 /* Private */,
-      11,    1,  104,    2, 0x08 /* Private */,
-      12,    1,  107,    2, 0x08 /* Private */,
-      13,    1,  110,    2, 0x08 /* Private */,
-      14,    0,  113,    2, 0x08 /* Private */,
-      15,    1,  114,    2, 0x08 /* Private */,
-      17,    1,  117,    2, 0x08 /* Private */,
+       3,    0,   80,    2, 0x08 /* Private */,
+       4,    1,   81,    2, 0x08 /* Private */,
+       6,    1,   84,    2, 0x08 /* Private */,
+       7,    1,   87,    2, 0x08 /* Private */,
+       8,    1,   90,    2, 0x08 /* Private */,
+       9,    1,   93,    2, 0x08 /* Private */,
+      10,    1,   96,    2, 0x08 /* Private */,
+      11,    1,   99,    2, 0x08 /* Private */,
+      12,    1,  102,    2, 0x08 /* Private */,
+      13,    1,  105,    2, 0x08 /* Private */,
+      14,    0,  108,    2, 0x08 /* Private */,
+      15,    1,  109,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -114,7 +112,6 @@ static const uint qt_meta_data_ModificaRichiesta[] = {
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QDate,   16,
     QMetaType::Void, QMetaType::QDate,   16,
 
        0        // eod
@@ -178,13 +175,13 @@ int ModificaRichiesta::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 13;
     }
     return _id;
 }

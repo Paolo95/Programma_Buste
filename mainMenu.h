@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "consegnaMateriale.h"
 #include "gestioneRichieste.h"
+#include "gestioneAnagrafica.h"
 
 namespace Ui {
 class MainMenu;
@@ -24,6 +25,8 @@ private slots:
     void on_BtnConsegnaMateriale_clicked();
 
     void on_btnGestioneRichieste_clicked();
+
+    void on_btnAnagrafica_clicked();
 
 private:
     Ui::MainMenu *ui;
