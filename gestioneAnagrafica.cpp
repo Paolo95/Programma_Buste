@@ -107,13 +107,26 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
               else if (this->isNumeric(ragioneSociale) || this->isNumeric(via) || !this->isNumeric(civico)){
               error.information(0,"Attenzione!","Campi/o errati/o");
           }else{
-              stringQuery="INSERT INTO cliente "
-                          "VALUES (NULL, 'AZIENDA', \""+ragioneSociale+"\" ,NULL,NULL, \""+via+"\", \""+civico+"\");";
+              stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
+                              "FROM cliente "
+                              "WHERE TIPOLOGIA='AZIENDA' AND RAGIONE_SOCIALE LIKE '%"+ragioneSociale+"%' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
               query = db->executeQuery(QString::fromStdString(stringQuery));
-              error.information(0,"Info","Cittadino inserito correttamente!");
-              ui->txtRagioneSociale->clear();
-              ui->txtVia->clear();
-              ui->txtCivico->clear();
+              if (query.size()==0){
+                  query.clear();
+                  stringQuery="INSERT INTO cliente "
+                          "VALUES (NULL, 'AZIENDA', \""+ragioneSociale+"\" ,NULL,NULL, \""+via+"\", \""+civico+"\");";
+                  query = db->executeQuery(QString::fromStdString(stringQuery));
+                  error.information(0,"Info","Cittadino inserito correttamente!");
+                  ui->txtRagioneSociale->clear();
+                  ui->txtVia->clear();
+                  ui->txtCivico->clear();
+              }else{
+                  MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
+                  error.critical(0,"Errore!","Il cittadino risulta già nel database!");
+              }
               }
           }else if (ui->rBtnPrivato->isChecked()){
               if (cognome.empty() || nome.empty() || via.empty() || civico.empty() ){
@@ -122,6 +135,12 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
               else if (this->isNumeric(cognome) || this->isNumeric(nome) || this->isNumeric(via) || !this->isNumeric(civico)){
               error.information(0,"Attenzione!","Campi/o errati/o");
           }else{
+              stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
+                              "FROM cliente "
+                              "WHERE TIPOLOGIA='PRIVATO' AND COGNOME='"+cognome+"' AND NOME='"+nome+"' AND VIA='"+via+"' AND N_CIVICO='"+civico+"'";
+              query = db->executeQuery(QString::fromStdString(stringQuery));
+              if (query.size()==0){
+              query.clear();
               stringQuery="INSERT INTO cliente "
                           "VALUES (NULL, 'PRIVATO', NULL, \""+cognome+"\" , \""+nome+"\" , \""+via+"\", \""+civico+"\");";
               query = db->executeQuery(QString::fromStdString(stringQuery));
@@ -130,6 +149,13 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
               ui->txtNome->clear();
               ui->txtVia->clear();
               ui->txtCivico->clear();
+              }else{
+                  error.critical(0,"Errore!","Il cittadino risulta già nel database!");
+                  MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
+              }
               }
               MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
               MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
@@ -328,6 +354,9 @@ void GestioneAnagrafica::on_cmdLinkBtnElimina_clicked()
                            +query.lastError().nativeErrorCode()+"\nIl cittadino ha delle richieste associate! "
                            "Eliminare tutte le richieste effettuate prima di eliminare il cittadino!");
             query.clear();
+        }else{
+            error.critical(0,"Errore!","Errore nel database, codice errore: "+query.lastError().nativeErrorCode());
+            query.clear();
         }
     }else{
         query.clear();
@@ -416,7 +445,7 @@ void GestioneAnagrafica::on_btnAnagraficaEsci_clicked()
 
 void GestioneAnagrafica::on_txtRagioneSocialeMod_textChanged(const QString &arg1)
 {
-    if (!QString::fromStdString(ragioneSociale).compare(arg1)){
+    if (!QString::fromStdString(ragioneSociale).compare(arg1) ){
          ui->txtRagioneSocialeMod->setStyleSheet("");
     }
     else{
@@ -428,7 +457,7 @@ void GestioneAnagrafica::on_txtRagioneSocialeMod_textChanged(const QString &arg1
 
 void GestioneAnagrafica::on_txtCognomeMod_textChanged(const QString &arg1)
 {
-    if (!QString::fromStdString(cognome).compare(arg1)){
+    if (!QString::fromStdString(cognome).compare(arg1) ){
          ui->txtCognomeMod->setStyleSheet("");
     }
     else{
@@ -439,7 +468,7 @@ void GestioneAnagrafica::on_txtCognomeMod_textChanged(const QString &arg1)
 
 void GestioneAnagrafica::on_txtViaMod_textChanged(const QString &arg1)
 {
-    if (!QString::fromStdString(via).compare(arg1)){
+    if (!QString::fromStdString(via).compare(arg1) ){
          ui->txtViaMod->setStyleSheet("");
     }
     else{
@@ -450,7 +479,7 @@ void GestioneAnagrafica::on_txtViaMod_textChanged(const QString &arg1)
 
 void GestioneAnagrafica::on_txtNomeMod_textChanged(const QString &arg1)
 {
-    if (!QString::fromStdString(nome).compare(arg1)){
+    if (!QString::fromStdString(nome).compare(arg1) ){
          ui->txtNomeMod->setStyleSheet("");
     }
     else{
@@ -461,7 +490,7 @@ void GestioneAnagrafica::on_txtNomeMod_textChanged(const QString &arg1)
 
 void GestioneAnagrafica::on_txtCivicoMod_textChanged(const QString &arg1)
 {
-    if (!QString::fromStdString(civico).compare(arg1)){
+    if (!QString::fromStdString(civico).compare(arg1) ){
          ui->txtCivicoMod->setStyleSheet("");
     }
     else{
@@ -474,12 +503,18 @@ void GestioneAnagrafica::activeButtonModifica (){
 
    if( ui->txtRagioneSocialeMod->styleSheet().isEmpty() &&
        ui->txtCognomeMod->styleSheet().isEmpty() && ui->txtNomeMod->styleSheet().isEmpty() &&
-       ui->txtViaMod->styleSheet().isEmpty() && ui->txtCivicoMod->styleSheet().isEmpty()){
+       ui->txtViaMod->styleSheet().isEmpty() && ui->txtCivicoMod->styleSheet().isEmpty() ){
         ui->BtnModifica->setEnabled(false);
-    }
-        else{
-        ui->BtnModifica->setEnabled(true);
-    }
+    }else if (ui->rBtnPrivato->isChecked() && (ui->txtCognomeMod->text().isEmpty() || ui->txtNomeMod->text().isEmpty() ||
+              ui->txtViaMod->text().isEmpty() || ui->txtCivicoMod->text().isEmpty())){
+       ui->BtnModifica->setEnabled(false);
+        }else if (ui->rBtnAzienda->isChecked() && (ui->txtRagioneSocialeMod->text().isEmpty() ||
+                  ui->txtCognomeMod->text().isEmpty() || ui->txtNomeMod->text().isEmpty() ||
+              ui->txtViaMod->text().isEmpty() || ui->txtCivicoMod->text().isEmpty())){
+       ui->BtnModifica->setEnabled(false);
+   }else{
+       ui->BtnModifica->setEnabled(true);
+   }
 }
 
 void GestioneAnagrafica::on_BtnModifica_clicked()
