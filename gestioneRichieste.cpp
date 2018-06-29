@@ -210,12 +210,12 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
     db->openConnection();
 
     if (ui->rBtnPrivato->isChecked()){
-    stringQuery="SELECT data_richiesta, r.n_rosse, r.n_blu, r.n_verdi, r.n_bianche, r.n_calendari, r.n_mastelli_umido, r.n_mastelli_vetro "
+    stringQuery="SELECT data_richiesta, r.n_rosse, r.n_blu, r.n_verdi, r.n_bianche, r.n_calendari, r.n_mastelli_umido, r.n_mastelli_vetro , r.n_secchi_umido_240 , r.n_secchi_vetro_240 "
                 "FROM richiesta r, cliente c "
                 "WHERE c.id_cliente=r.cliente AND c.cognome='"+cognome+"' AND c.nome='"+nome+"' AND c.via='"+via+"' AND c.n_civico='"+civico+"' "
                 "ORDER BY data_richiesta DESC";
     }else if (ui->rBtnAzienda->isChecked()){
-        stringQuery="SELECT data_richiesta, r.n_rosse, r.n_blu, r.n_verdi, r.n_bianche, r.n_calendari, r.n_secchi_1100, r.n_secchi_240 "
+        stringQuery="SELECT data_richiesta, r.n_rosse, r.n_blu, r.n_verdi, r.n_bianche, r.n_calendari, r.n_secchi_umido_240 , r.n_secchi_vetro_240 , r.n_secchi_umido_360 , r.n_secchi_vetro_360 "
                     "FROM richiesta r, cliente c "
                     "WHERE c.id_cliente=r.cliente AND c.ragione_sociale='"+ragioneSociale+"' AND c.via='"+via+"' AND c.n_civico='"+civico+"'"
                     "ORDER BY data_richiesta DESC";
@@ -236,6 +236,8 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
                 model->setHeaderData(5,Qt::Horizontal,"CALENDARI");
                 model->setHeaderData(6,Qt::Horizontal,"MASTELLI UMIDO");
                 model->setHeaderData(7,Qt::Horizontal,"MASTELLI VETRO");
+                model->setHeaderData(8,Qt::Horizontal,"SECCHI UMIDO 240");
+                model->setHeaderData(9,Qt::Horizontal,"SECCHI VETRO 240");
             }else if (ui->rBtnAzienda->isChecked() ){
                 model->setHeaderData(0,Qt::Horizontal,"DATA");
                 model->setHeaderData(1,Qt::Horizontal,"ROSSE");
@@ -243,8 +245,10 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
                 model->setHeaderData(3,Qt::Horizontal,"VERDI");
                 model->setHeaderData(4,Qt::Horizontal,"BIANCHE");
                 model->setHeaderData(5,Qt::Horizontal,"CALENDARI");
-                model->setHeaderData(6,Qt::Horizontal,"SECCHI 1100");
-                model->setHeaderData(7,Qt::Horizontal,"SECCHI 240");
+                model->setHeaderData(6,Qt::Horizontal,"SECCHI UMIDO 240");
+                model->setHeaderData(7,Qt::Horizontal,"SECCHI VETRO 240");
+                model->setHeaderData(8,Qt::Horizontal,"SECCHI UMIDO 360");
+                model->setHeaderData(9,Qt::Horizontal,"SECCHI VETRO 360");
             }
 
            ui->tblRicercaRichieste->setModel(model);
@@ -281,6 +285,10 @@ void GestioneRichieste::on_cmdLinkBtnModifica_clicked()
                 nMastelliUmido = ui->tblRicercaRichieste->model()->data(index).toUInt();
                 index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),7,QModelIndex());
                 nMastelliVetro = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),8,QModelIndex());
+                nSecchiUmido240 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),9,QModelIndex());
+                nSecchiVetro240 = ui->tblRicercaRichieste->model()->data(index).toUInt();
                 ModificaRichiesta *modifica = new ModificaRichiesta(this,this);
                 modifica->show();
             }else if (ui->rBtnAzienda->isChecked()){
@@ -297,9 +305,13 @@ void GestioneRichieste::on_cmdLinkBtnModifica_clicked()
                 index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),5,QModelIndex());
                 nCalendari = ui->tblRicercaRichieste->model()->data(index).toUInt();
                 index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),6,QModelIndex());
-                nSecchi1100 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                nSecchiUmido240 = ui->tblRicercaRichieste->model()->data(index).toUInt();
                 index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),7,QModelIndex());
-                nSecchi240 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                nSecchiVetro240 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),8,QModelIndex());
+                nSecchiUmido360 = ui->tblRicercaRichieste->model()->data(index).toUInt();
+                index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),9,QModelIndex());
+                nSecchiVetro360 = ui->tblRicercaRichieste->model()->data(index).toUInt();
                 ModificaRichiesta *modifica = new ModificaRichiesta(this,this);
                 modifica->show();
              }

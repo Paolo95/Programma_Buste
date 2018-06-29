@@ -32,17 +32,21 @@ private slots:
 
     void on_comboBoxCalendari_currentIndexChanged(int index);
 
-    void on_comboBoxUmido_currentIndexChanged(int index);
+    void on_comboBoxMastelliUmido_currentIndexChanged(int index);
 
-    void on_comboBoxVetro_currentIndexChanged(int index);
+    void on_comboBoxMastelliVetro_currentIndexChanged(int index);
 
-    void on_comboBoxSecchi240_currentIndexChanged(int index);
+    void on_comboBoxSecchiUmido240_currentIndexChanged(int index);
 
-    void on_comboBoxSecchi1100_currentIndexChanged(int index);
+    void on_comboBoxSecchiVetro240_currentIndexChanged(int index);
 
     void on_btnSalva_clicked();
 
     void on_dateEditRichiesta_userDateChanged(const QDate &date);
+
+    void on_comboBoxSecchiUmido360_currentIndexChanged(int index);
+
+    void on_comboBoxSecchiVetro360_currentIndexChanged(int index);
 
 private:
     Ui::ModificaRichiesta *ui;

@@ -82,3 +82,10 @@ void MainMenu::on_btnAnagrafica_clicked()
     GestioneAnagrafica *anagrafica = new GestioneAnagrafica(this);
     anagrafica->show();
 }
+
+void MainMenu::on_btnCentroFiera_clicked()
+{
+    this->hide();
+    CentroFiera *fiera= new CentroFiera(this);
+    fiera->show();
+}

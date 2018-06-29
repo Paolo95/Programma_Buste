@@ -24,8 +24,10 @@ public:
     unsigned int nCalendari;
     unsigned int nMastelliUmido;
     unsigned int nMastelliVetro;
-    unsigned int nSecchi240;
-    unsigned int nSecchi1100;
+    unsigned int nSecchiVetro240;
+    unsigned int nSecchiVetro360;
+    unsigned int nSecchiUmido240;
+    unsigned int nSecchiUmido360;
     string ragioneSociale;
     string cognome;
     string nome;

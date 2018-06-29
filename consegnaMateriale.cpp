@@ -167,7 +167,8 @@ void Consegna_Materiale::on_rBtnPrivato_clicked()
     ui->txtCivico->setEnabled(true);
     ui->txtVia->setEnabled(true);
     ui->grpMastelli->setEnabled(true);
-    ui->grpSecchi->setEnabled(false);
+    ui->grpSecchi240->setEnabled(true);
+    ui->grpSecchi360->setEnabled(false);
 }
 
 void Consegna_Materiale::on_rBtnAzienda_clicked()
@@ -188,7 +189,8 @@ void Consegna_Materiale::on_rBtnAzienda_clicked()
     ui->txtCivico->setEnabled(true);
     ui->txtVia->setEnabled(true);
     ui->grpMastelli->setEnabled(false);
-    ui->grpSecchi->setEnabled(true);
+    ui->grpSecchi240->setEnabled(true);
+    ui->grpSecchi360->setEnabled(true);
 }
 
 void Consegna_Materiale::on_BtnElenco_clicked()
@@ -262,8 +264,9 @@ void Consegna_Materiale::on_btnSalva_clicked()
 {
     db->openConnection();
     if (ui->comboBoxBianche->currentIndex()==0 && ui->comboBoxRosse->currentIndex()==0 && ui->comboBoxVerdi->currentIndex()==0
-            && ui->comboBoxBlu->currentIndex()==0 && ui->comboBoxCalendari->currentIndex()==0 && ui->comboBoxSecchi240->currentIndex()==0 &&
-            ui->comboBoxUmido->currentIndex()==0 && ui->comboBoxVetro->currentIndex()==0 && ui->comboBoxSecchi1100->currentIndex()==0){
+            && ui->comboBoxBlu->currentIndex()==0 && ui->comboBoxCalendari->currentIndex()==0 && ui->comboBoxSecchiUmido240->currentIndex()==0 &&
+            ui->comboBoxMastelliUmido->currentIndex()==0 && ui->comboBoxMastelliVetro->currentIndex()==0 && ui->comboBoxSecchiVetro240->currentIndex()==0
+            && ui->comboBoxSecchiUmido360->currentIndex()==0 && ui->comboBoxSecchiVetro360->currentIndex()==0){
         error.information(0,"Attenzione!","Devi indicare almeno un materiale da consegnare al cittadino!");
     }else if (ui->rBtnPrivato->isChecked()){
         stringQuery="SELECT id_cliente "
@@ -278,10 +281,12 @@ void Consegna_Materiale::on_btnSalva_clicked()
                                               +QVariant(ui->comboBoxVerdi->currentIndex()).toString().toStdString()+"','"
                                               +QVariant(ui->comboBoxBianche->currentIndex()).toString().toStdString()+"','"
                                               +QVariant(ui->comboBoxCalendari->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxUmido->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxVetro->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxSecchi1100->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxSecchi240->currentIndex()).toString().toStdString()+"');";
+                                              +QVariant(ui->comboBoxMastelliUmido->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxMastelliVetro->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchiUmido240->currentIndex()).toString().toStdString()+"','"
+                                              +"0','"
+                                              +QVariant(ui->comboBoxSecchiVetro240->currentIndex()).toString().toStdString()+"','"
+                                              +"0');";
         query = db->executeQuery(QString::fromStdString(stringQuery));
         if (db->lastError().isValid()){
             error.information(0,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
@@ -292,10 +297,12 @@ void Consegna_Materiale::on_btnSalva_clicked()
             ui->comboBoxVerdi->setCurrentIndex(0);
             ui->comboBoxRosse->setCurrentIndex(0);
             ui->comboBoxCalendari->setCurrentIndex(0);
-            ui->comboBoxUmido->setCurrentIndex(0);
-            ui->comboBoxVetro->setCurrentIndex(0);
-            ui->comboBoxSecchi240->setCurrentIndex(0);
-            ui->comboBoxSecchi1100->setCurrentIndex(0);
+            ui->comboBoxMastelliUmido->setCurrentIndex(0);
+            ui->comboBoxMastelliVetro->setCurrentIndex(0);
+            ui->comboBoxSecchiUmido240->setCurrentIndex(0);
+            ui->comboBoxSecchiUmido360->setCurrentIndex(0);
+            ui->comboBoxSecchiVetro240->setCurrentIndex(0);
+            ui->comboBoxSecchiVetro360->setCurrentIndex(0);
             ui->lblDataUltimaRichiestaDb->clear();
             model->clear();
             ui->tblRicerca->setModel(model);
@@ -318,10 +325,12 @@ void Consegna_Materiale::on_btnSalva_clicked()
                                               +QVariant(ui->comboBoxVerdi->currentIndex()).toString().toStdString()+"','"
                                               +QVariant(ui->comboBoxBianche->currentIndex()).toString().toStdString()+"','"
                                               +QVariant(ui->comboBoxCalendari->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxUmido->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxVetro->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxSecchi1100->currentIndex()).toString().toStdString()+"','"
-                                              +QVariant(ui->comboBoxSecchi240->currentIndex()).toString().toStdString()+"');";
+                                              +QVariant(ui->comboBoxMastelliUmido->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxMastelliVetro->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchiUmido240->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchiUmido360->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchiVetro240->currentIndex()).toString().toStdString()+"','"
+                                              +QVariant(ui->comboBoxSecchiVetro360->currentIndex()).toString().toStdString()+"');";
         query = db->executeQuery(QString::fromStdString(stringQuery));
         if (db->lastError().isValid()){
             error.information(0,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
@@ -332,10 +341,12 @@ void Consegna_Materiale::on_btnSalva_clicked()
             ui->comboBoxVerdi->setCurrentIndex(0);
             ui->comboBoxRosse->setCurrentIndex(0);
             ui->comboBoxCalendari->setCurrentIndex(0);
-            ui->comboBoxUmido->setCurrentIndex(0);
-            ui->comboBoxVetro->setCurrentIndex(0);
-            ui->comboBoxSecchi240->setCurrentIndex(0);
-            ui->comboBoxSecchi1100->setCurrentIndex(0);
+            ui->comboBoxMastelliUmido->setCurrentIndex(0);
+            ui->comboBoxMastelliVetro->setCurrentIndex(0);
+            ui->comboBoxSecchiUmido240->setCurrentIndex(0);
+            ui->comboBoxSecchiUmido360->setCurrentIndex(0);
+            ui->comboBoxSecchiVetro240->setCurrentIndex(0);
+            ui->comboBoxSecchiVetro360->setCurrentIndex(0);
             ui->lblDataUltimaRichiestaDb->clear();
             model->clear();
             ui->tblRicerca->setModel(model);
