@@ -33,7 +33,7 @@ void ElencoTari::on_btnElencoEsci_clicked()
 void ElencoTari::on_btnCerca_clicked(){
 
     if (ui->comboBoxLettera->currentIndex()==0){
-        error.information(0,"Attenzione!","Seleziona una lettera per effettuare la ricerca!");
+        error.information(nullptr,"Attenzione!","Seleziona una lettera per effettuare la ricerca!");
     }else if(ui->rBtnElencoPrivato->isChecked()){
         ui->btnElencoPassa->setEnabled(true);
         db = new DbConnect();
@@ -69,7 +69,7 @@ void ElencoTari::on_btnCerca_clicked(){
 void ElencoTari::on_btnElencoPassa_clicked(){
 
     if (ui->tblElencoTari->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare un cittadino dalla lista!");
     }else{
             if (ui->rBtnElencoPrivato->isChecked()){
                 index = model->index(ui->tblElencoTari->selectionModel()->currentIndex().row(),0,QModelIndex());

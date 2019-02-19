@@ -114,18 +114,18 @@ void Consegna_Materiale::on_BtnCerca_clicked()
         }
         query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && cognome.empty() && !nome.empty() && via.empty() && civico.empty()){
-        error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
+        error.information(nullptr,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && !civico.empty()){
-        error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per numero civico!");
+        error.information(nullptr,"Attenzione!","Non è possibile eseguire la ricerca per numero civico!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && civico.empty()){
-        error.information(0,"Attenzione!","Inserire almeno uno dei seguenti campi:\n"
+        error.information(nullptr,"Attenzione!","Inserire almeno uno dei seguenti campi:\n"
                                           "-Ragione Sociale\n"
                                           "-Cognome\n"
                                           "-Via");
     }
 
     if (query.size()==0){
-        error.information(0,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
+        error.information(nullptr,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
     }else{
         model=new QSqlQueryModel();
         model->setQuery(query);
@@ -202,7 +202,7 @@ void Consegna_Materiale::on_BtnElenco_clicked()
 void Consegna_Materiale::on_cmdLinkBtnVerifica_clicked()
 {
     if (ui->tblRicerca->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare un cittadino dalla lista!");
     }else{
         ui->btnSalva->setEnabled(true);
             if (ui->rBtnPrivato->isChecked()){
@@ -242,7 +242,7 @@ void Consegna_Materiale::on_cmdLinkBtnVerifica_clicked()
     query = db->executeQuery(QString::fromStdString(stringQuery));
     if (query.size()==0){
         ui->lblDataUltimaRichiestaDb->setVisible(true);
-        error.information(0,"Info","Il cliente non ha mai effetuato una richiesta!");
+        error.information(nullptr,"Info","Il cliente non ha mai effetuato una richiesta!");
     }else{
     ui->lblDataUltimaRichiestaDb->setVisible(true);
     query.next();
@@ -267,7 +267,7 @@ void Consegna_Materiale::on_btnSalva_clicked()
             && ui->comboBoxBlu->currentIndex()==0 && ui->comboBoxCalendari->currentIndex()==0 && ui->comboBoxSecchiUmido240->currentIndex()==0 &&
             ui->comboBoxMastelliUmido->currentIndex()==0 && ui->comboBoxMastelliVetro->currentIndex()==0 && ui->comboBoxSecchiVetro240->currentIndex()==0
             && ui->comboBoxSecchiUmido360->currentIndex()==0 && ui->comboBoxSecchiVetro360->currentIndex()==0){
-        error.information(0,"Attenzione!","Devi indicare almeno un materiale da consegnare al cittadino!");
+        error.information(nullptr,"Attenzione!","Devi indicare almeno un materiale da consegnare al cittadino!");
     }else if (ui->rBtnPrivato->isChecked()){
         stringQuery="SELECT id_cliente "
                     "FROM cliente "
@@ -289,9 +289,9 @@ void Consegna_Materiale::on_btnSalva_clicked()
                                               +"0');";
         query = db->executeQuery(QString::fromStdString(stringQuery));
         if (db->lastError().isValid()){
-            error.information(0,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
+            error.information(nullptr,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
         }else{
-            error.information(0,"Info","Richiesta registrata correttamente!");
+            error.information(nullptr,"Info","Richiesta registrata correttamente!");
             ui->comboBoxBianche->setCurrentIndex(0);
             ui->comboBoxBlu->setCurrentIndex(0);
             ui->comboBoxVerdi->setCurrentIndex(0);
@@ -333,9 +333,9 @@ void Consegna_Materiale::on_btnSalva_clicked()
                                               +QVariant(ui->comboBoxSecchiVetro360->currentIndex()).toString().toStdString()+"');";
         query = db->executeQuery(QString::fromStdString(stringQuery));
         if (db->lastError().isValid()){
-            error.information(0,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
+            error.information(nullptr,"Attenzione","Errore nel database!\nProbabilmente è già stata registrata la stessa richiesta!");
         }else{
-            error.information(0,"Info","Richiesta registrata correttamente!");
+            error.information(nullptr,"Info","Richiesta registrata correttamente!");
             ui->comboBoxBianche->setCurrentIndex(0);
             ui->comboBoxBlu->setCurrentIndex(0);
             ui->comboBoxVerdi->setCurrentIndex(0);

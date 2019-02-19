@@ -111,18 +111,18 @@ void GestioneRichieste::on_BtnCerca_clicked()
         }
         query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && cognome.empty() && !nome.empty() && via.empty() && civico.empty()){
-        error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
+        error.information(nullptr,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && !civico.empty()){
-        error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per numero civico!");
+        error.information(nullptr,"Attenzione!","Non è possibile eseguire la ricerca per numero civico!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && civico.empty()){
-        error.information(0,"Attenzione!","Inserire almeno uno dei seguenti campi:\n"
+        error.information(nullptr,"Attenzione!","Inserire almeno uno dei seguenti campi:\n"
                                           "-Ragione Sociale\n"
                                           "-Cognome\n"
                                           "-Via");
     }
 
     if (query.size()==0){
-        error.information(0,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
+        error.information(nullptr,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
     }else{
         model=new QSqlQueryModel();
         model->setQuery(query);
@@ -186,7 +186,7 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
     ui->cmdLinkBtnModifica->setEnabled(true);
     ui->cmdLinkBtnElimina->setEnabled(true);
     if (ui->tblRicercaCittadino->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare un cittadino dalla lista!");
     }else{
             if (ui->rBtnPrivato->isChecked()){
                 index = model->index(ui->tblRicercaCittadino->selectionModel()->currentIndex().row(),0,QModelIndex());
@@ -222,7 +222,7 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
     }
     query = db->executeQuery(QString::fromStdString(stringQuery));
     if (query.size()==0){
-        error.information(0,"Info","Il cliente non ha mai effetuato una richiesta!");
+        error.information(nullptr,"Info","Il cliente non ha mai effetuato una richiesta!");
     }else
         {
             model=new QSqlQueryModel();
@@ -266,7 +266,7 @@ void GestioneRichieste::on_cmdLinkBtnTrova_clicked()
 void GestioneRichieste::on_cmdLinkBtnModifica_clicked()
 {
     if (ui->tblRicercaRichieste->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare una richiesta dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare una richiesta dalla lista!");
     }else{
             if (ui->rBtnPrivato->isChecked()){
                 index = model->index(ui->tblRicercaRichieste->selectionModel()->currentIndex().row(),0,QModelIndex());
@@ -325,7 +325,7 @@ void GestioneRichieste::refreshRichieste(){
 void GestioneRichieste::on_cmdLinkBtnElimina_clicked()
 {
     if (ui->tblRicercaRichieste->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare una richiesta dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare una richiesta dalla lista!");
     }else{
     db = new DbConnect();
     db->openConnection();

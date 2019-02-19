@@ -253,7 +253,7 @@ void ModificaRichiesta::on_btnSalva_clicked()
     emit mandaModifica();
     QObject::disconnect(this , SIGNAL( mandaModifica() ), f , SLOT(refreshRichieste()));
 
-    error.information(0,"Info","Modifica effettuata con successo!");
+    error.information(nullptr,"Info","Modifica effettuata con successo!");
 }
 
 

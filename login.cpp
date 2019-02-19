@@ -67,12 +67,12 @@ void Login::on_BtnLogin_clicked()
     username=ui->txtUsername->text().toStdString();
     password=ui->txtPassword->text().toStdString();
     if ( username.empty() || password.empty() ){
-    error.information(0,"Errore","Inserisci username e password!");
+    error.information(nullptr,"Errore","Inserisci username e password!");
     }else{
             stringQuery="SELECT * FROM utente WHERE (BINARY USERNAME ='"+username+ "'" + " AND BINARY PASSWORD='"+password+"')";
             query = db->executeQuery(QString::fromStdString(stringQuery));
             if (query.size()==0){
-                error.information(0,"Login non eseguito","Nome utente e/o password errati o non esistenti!");
+                error.information(nullptr,"Login non eseguito","Nome utente e/o password errati o non esistenti!");
             }else{
             this->hide();
             MainMenu *m = new MainMenu(this);
@@ -91,12 +91,12 @@ void Login::on_txtPassword_returnPressed()
     username=ui->txtUsername->text().toStdString();
     password=ui->txtPassword->text().toStdString();
     if ( username.empty() || password.empty() ){
-    error.information(0,"Errore","Inserisci username e password!");
+    error.information(nullptr,"Errore","Inserisci username e password!");
     }else{
             stringQuery="SELECT * FROM utente WHERE (BINARY USERNAME ='"+username+ "'" + " AND BINARY PASSWORD='"+password+"')";
             query = db->executeQuery(QString::fromStdString(stringQuery));
             if (query.size()==0){
-                error.information(0,"Login non eseguito","Nome utente e/o password errati o non esistenti!");
+                error.information(nullptr,"Login non eseguito","Nome utente e/o password errati o non esistenti!");
             }else{
             this->hide();
             MainMenu *m = new MainMenu(this);

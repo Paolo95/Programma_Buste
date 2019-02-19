@@ -102,10 +102,10 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
           if (ui->rBtnAzienda->isChecked()){
 
               if (ragioneSociale.empty() || via.empty() || civico.empty()){
-              error.information(0,"Attenzione!","Inserisci tutti i campi!");
+              error.information(nullptr,"Attenzione!","Inserisci tutti i campi!");
               }
               else if (this->isNumeric(ragioneSociale) || this->isNumeric(via) || !this->isNumeric(civico)){
-              error.information(0,"Attenzione!","Campi/o errati/o");
+              error.information(nullptr,"Attenzione!","Campi/o errati/o");
           }else{
               stringQuery="SELECT RAGIONE_SOCIALE,VIA,N_CIVICO "
                               "FROM cliente "
@@ -116,7 +116,11 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
                   stringQuery="INSERT INTO cliente "
                           "VALUES (NULL, 'AZIENDA', \""+ragioneSociale+"\" ,NULL,NULL, \""+via+"\", \""+civico+"\");";
                   query = db->executeQuery(QString::fromStdString(stringQuery));
-                  error.information(0,"Info","Cittadino inserito correttamente!");
+                  error.information(nullptr,"Info","Cittadino inserito correttamente!");
+                  MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
+                  MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
                   ui->txtRagioneSociale->clear();
                   ui->txtVia->clear();
                   ui->txtCivico->clear();
@@ -125,15 +129,15 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
                   MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
                   MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
                   MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
-                  error.critical(0,"Errore!","Il cittadino risulta già nel database!");
+                  error.critical(nullptr,"Errore!","Il cittadino risulta già nel database!");
               }
               }
           }else if (ui->rBtnPrivato->isChecked()){
               if (cognome.empty() || nome.empty() || via.empty() || civico.empty() ){
-              error.information(0,"Attenzione!","Inserisci tutti i campi!");
+              error.information(nullptr,"Attenzione!","Inserisci tutti i campi!");
               }
               else if (this->isNumeric(cognome) || this->isNumeric(nome) || this->isNumeric(via) || !this->isNumeric(civico)){
-              error.information(0,"Attenzione!","Campi/o errati/o");
+              error.information(nullptr,"Attenzione!","Campi/o errati/o");
           }else{
               stringQuery="SELECT COGNOME,NOME,VIA,N_CIVICO "
                               "FROM cliente "
@@ -144,13 +148,13 @@ void GestioneAnagrafica::on_BtnInserisci_clicked()
               stringQuery="INSERT INTO cliente "
                           "VALUES (NULL, 'PRIVATO', NULL, \""+cognome+"\" , \""+nome+"\" , \""+via+"\", \""+civico+"\");";
               query = db->executeQuery(QString::fromStdString(stringQuery));
-              error.information(0,"Info","Cittadino inserito correttamente!");
+              error.information(nullptr,"Info","Cittadino inserito correttamente!");
               ui->txtCognome->clear();
               ui->txtNome->clear();
               ui->txtVia->clear();
               ui->txtCivico->clear();
               }else{
-                  error.critical(0,"Errore!","Il cittadino risulta già nel database!");
+                  error.critical(nullptr,"Errore!","Il cittadino risulta già nel database!");
                   MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
                   MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
                   MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
@@ -245,18 +249,18 @@ void GestioneAnagrafica::on_BtnCerca_clicked()
         }
         query = db->executeQuery(QString::fromStdString(stringQuery));
     }else if (ragioneSociale.empty() && cognome.empty() && !nome.empty() && via.empty() && civico.empty()){
-        error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
+        error.information(nullptr,"Attenzione!","Non è possibile eseguire la ricerca per nome!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && !civico.empty()){
-        error.information(0,"Attenzione!","Non è possibile eseguire la ricerca per numero civico!");
+        error.information(nullptr,"Attenzione!","Non è possibile eseguire la ricerca per numero civico!");
     }else if (ragioneSociale.empty() && cognome.empty() && nome.empty() && via.empty() && civico.empty()){
-        error.information(0,"Attenzione!","Inserire almeno uno dei seguenti campi:\n"
+        error.information(nullptr,"Attenzione!","Inserire almeno uno dei seguenti campi:\n"
                                           "-Ragione Sociale\n"
                                           "-Cognome\n"
                                           "-Via");
     }
 
     if (query.size()==0){
-        error.information(0,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
+        error.information(nullptr,"Cittadino non trovato","Il cittadino non risulta nell'elenco anagrafico!");
     }else{
         model=new QSqlQueryModel();
         model->setQuery(query);
@@ -284,7 +288,7 @@ void GestioneAnagrafica::on_BtnCerca_clicked()
 void GestioneAnagrafica::on_cmdLinkBtnElimina_clicked()
 {
     if (ui->tblRicerca->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare un cittadino dalla lista!");
     }else{
             if (ui->rBtnPrivato->isChecked()){
                 index = model->index(ui->tblRicerca->selectionModel()->currentIndex().row(),0,QModelIndex());
@@ -350,17 +354,17 @@ void GestioneAnagrafica::on_cmdLinkBtnElimina_clicked()
     }
     if (query.isValid()==0){
         if (query.lastError().nativeErrorCode().toInt()==1451){
-            error.critical(0,"Errore!","Non è possibile effettuare l'operazione.\n\nCodice errore database: "
+            error.critical(nullptr,"Errore!","Non è possibile effettuare l'operazione.\n\nCodice errore database: "
                            +query.lastError().nativeErrorCode()+"\nIl cittadino ha delle richieste associate! "
                            "Eliminare tutte le richieste effettuate prima di eliminare il cittadino!");
             query.clear();
         }else{
-            error.critical(0,"Errore!","Errore nel database, codice errore: "+query.lastError().nativeErrorCode());
+            error.critical(nullptr,"Errore!","Errore nel database, codice errore: "+query.lastError().nativeErrorCode());
             query.clear();
         }
     }else{
         query.clear();
-        error.information(0,"Info","Cittadino eliminato correttamente!");
+        error.information(nullptr,"Info","Cittadino eliminato correttamente!");
         model=new QSqlQueryModel();
         model->clear();
         ui->tblRicerca->setModel(model);
@@ -380,7 +384,7 @@ void GestioneAnagrafica::on_cmdLinkBtnModifica_clicked()
 {
 
     if (ui->tblRicerca->selectionModel()->currentIndex().row()==-1){
-        error.information(0,"Attenzione!","Devi selezionare un cittadino dalla lista!");
+        error.information(nullptr,"Attenzione!","Devi selezionare un cittadino dalla lista!");
     }else{
         ui->BtnModifica->setEnabled(false);
             if (ui->rBtnPrivato->isChecked()){
@@ -586,7 +590,7 @@ void GestioneAnagrafica::on_BtnModifica_clicked()
           ui->tblRicerca->setModel(model);
           ui->cmdLinkBtnElimina->setEnabled(false);
           ui->cmdLinkBtnModifica->setEnabled(false);
-          error.information(0,"Info","Modifica effettuata con successo!");
+          error.information(nullptr,"Info","Modifica effettuata con successo!");
           MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
           MessageExitGestioneAnagrafica.removeButton(BtnSiGestioneAnagrafica);
           MessageExitGestioneAnagrafica.removeButton(BtnNoGestioneAnagrafica);
