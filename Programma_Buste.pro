@@ -36,7 +36,8 @@ SOURCES += \
     gestioneRichieste.cpp \
     modificaRichiesta.cpp \
     gestioneAnagrafica.cpp \
-    centroFiera.cpp
+    centroFiera.cpp \
+    gestioneMateriale.cpp
 
 HEADERS += \
         login.h \
@@ -48,7 +49,8 @@ HEADERS += \
     gestioneRichieste.h \
     modificaRichiesta.h \
     gestioneAnagrafica.h \
-    centroFiera.h
+    centroFiera.h \
+    gestioneMateriale.h
 
 FORMS += \
         login.ui \
@@ -59,4 +61,6 @@ FORMS += \
     gestioneRichieste.ui \
     modificaRichiesta.ui \
     gestioneAnagrafica.ui \
-    centroFiera.ui
+    centroFiera.ui \
+    elencotari.ui \
+    gestioneMateriale.ui

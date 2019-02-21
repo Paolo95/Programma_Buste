@@ -60,7 +60,8 @@ SOURCES       = main.cpp \
 		gestioneRichieste.cpp \
 		modificaRichiesta.cpp \
 		gestioneAnagrafica.cpp \
-		centroFiera.cpp moc_login.cpp \
+		centroFiera.cpp \
+		gestioneMateriale.cpp moc_login.cpp \
 		moc_info.cpp \
 		moc_consegnaMateriale.cpp \
 		moc_mainMenu.cpp \
@@ -68,7 +69,8 @@ SOURCES       = main.cpp \
 		moc_gestioneRichieste.cpp \
 		moc_modificaRichiesta.cpp \
 		moc_gestioneAnagrafica.cpp \
-		moc_centroFiera.cpp
+		moc_centroFiera.cpp \
+		moc_gestioneMateriale.cpp
 OBJECTS       = main.o \
 		login.o \
 		info.o \
@@ -80,6 +82,7 @@ OBJECTS       = main.o \
 		modificaRichiesta.o \
 		gestioneAnagrafica.o \
 		centroFiera.o \
+		gestioneMateriale.o \
 		moc_login.o \
 		moc_info.o \
 		moc_consegnaMateriale.o \
@@ -88,7 +91,8 @@ OBJECTS       = main.o \
 		moc_gestioneRichieste.o \
 		moc_modificaRichiesta.o \
 		moc_gestioneAnagrafica.o \
-		moc_centroFiera.o
+		moc_centroFiera.o \
+		moc_gestioneMateriale.o
 DIST          = /opt/Qt/5.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/5.11.2/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt/5.11.2/gcc_64/mkspecs/common/linux.conf \
@@ -287,7 +291,8 @@ DIST          = /opt/Qt/5.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		gestioneRichieste.h \
 		modificaRichiesta.h \
 		gestioneAnagrafica.h \
-		centroFiera.h main.cpp \
+		centroFiera.h \
+		gestioneMateriale.h main.cpp \
 		login.cpp \
 		info.cpp \
 		consegnaMateriale.cpp \
@@ -297,7 +302,8 @@ DIST          = /opt/Qt/5.11.2/gcc_64/mkspecs/features/spec_pre.prf \
 		gestioneRichieste.cpp \
 		modificaRichiesta.cpp \
 		gestioneAnagrafica.cpp \
-		centroFiera.cpp
+		centroFiera.cpp \
+		gestioneMateriale.cpp
 QMAKE_TARGET  = Programma_Buste
 DESTDIR       = 
 TARGET        = Programma_Buste
@@ -306,7 +312,7 @@ TARGET        = Programma_Buste
 first: all
 ####### Build rules
 
-$(TARGET): ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_gestioneRichieste.h ui_modificaRichiesta.h ui_gestioneAnagrafica.h ui_centroFiera.h $(OBJECTS)  
+$(TARGET): ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_gestioneRichieste.h ui_modificaRichiesta.h ui_gestioneAnagrafica.h ui_centroFiera.h ui_gestioneMateriale.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: Programma_Buste.pro /opt/Qt/5.11.2/gcc_64/mkspecs/linux-g++/qmake.conf /opt/Qt/5.11.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -713,9 +719,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.11.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents login.h info.h dbconnect.h consegnaMateriale.h mainMenu.h elencotari.h gestioneRichieste.h modificaRichiesta.h gestioneAnagrafica.h centroFiera.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp login.cpp info.cpp consegnaMateriale.cpp dbConnect.cpp mainMenu.cpp elencoTari.cpp gestioneRichieste.cpp modificaRichiesta.cpp gestioneAnagrafica.cpp centroFiera.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents login.ui info.ui consegnaMateriale.ui mainMenu.ui elencotari.ui gestioneRichieste.ui modificaRichiesta.ui gestioneAnagrafica.ui centroFiera.ui $(DISTDIR)/
+	$(COPY_FILE) --parents login.h info.h dbconnect.h consegnaMateriale.h mainMenu.h elencotari.h gestioneRichieste.h modificaRichiesta.h gestioneAnagrafica.h centroFiera.h gestioneMateriale.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp login.cpp info.cpp consegnaMateriale.cpp dbConnect.cpp mainMenu.cpp elencoTari.cpp gestioneRichieste.cpp modificaRichiesta.cpp gestioneAnagrafica.cpp centroFiera.cpp gestioneMateriale.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents login.ui info.ui consegnaMateriale.ui mainMenu.ui elencotari.ui gestioneRichieste.ui modificaRichiesta.ui gestioneAnagrafica.ui centroFiera.ui elencotari.ui gestioneMateriale.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -747,9 +753,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt/5.11.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -W -dM -E -o moc_predefs.h /opt/Qt/5.11.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_login.cpp moc_info.cpp moc_consegnaMateriale.cpp moc_mainMenu.cpp moc_elencotari.cpp moc_gestioneRichieste.cpp moc_modificaRichiesta.cpp moc_gestioneAnagrafica.cpp moc_centroFiera.cpp
+compiler_moc_header_make_all: moc_login.cpp moc_info.cpp moc_consegnaMateriale.cpp moc_mainMenu.cpp moc_elencotari.cpp moc_gestioneRichieste.cpp moc_modificaRichiesta.cpp moc_gestioneAnagrafica.cpp moc_centroFiera.cpp moc_gestioneMateriale.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_login.cpp moc_info.cpp moc_consegnaMateriale.cpp moc_mainMenu.cpp moc_elencotari.cpp moc_gestioneRichieste.cpp moc_modificaRichiesta.cpp moc_gestioneAnagrafica.cpp moc_centroFiera.cpp
+	-$(DEL_FILE) moc_login.cpp moc_info.cpp moc_consegnaMateriale.cpp moc_mainMenu.cpp moc_elencotari.cpp moc_gestioneRichieste.cpp moc_modificaRichiesta.cpp moc_gestioneAnagrafica.cpp moc_centroFiera.cpp moc_gestioneMateriale.cpp
 moc_login.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1055,6 +1061,7 @@ moc_login.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		login.h \
 		moc_predefs.h \
@@ -1474,6 +1481,7 @@ moc_consegnaMateriale.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		consegnaMateriale.h \
 		moc_predefs.h \
@@ -1784,6 +1792,7 @@ moc_mainMenu.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		mainMenu.h \
 		moc_predefs.h \
@@ -2094,6 +2103,7 @@ moc_elencotari.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QDialog \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		elencotari.h \
 		moc_predefs.h \
@@ -2404,6 +2414,7 @@ moc_gestioneRichieste.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		gestioneRichieste.h \
 		moc_predefs.h \
@@ -2712,6 +2723,7 @@ moc_modificaRichiesta.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QDialog \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtableview.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QWidget \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
@@ -3024,6 +3036,7 @@ moc_gestioneAnagrafica.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow 
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		gestioneAnagrafica.h \
 		moc_predefs.h \
@@ -3334,19 +3347,129 @@ moc_centroFiera.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMainWindow \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		centroFiera.h \
 		moc_predefs.h \
 		/opt/Qt/5.11.2/gcc_64/bin/moc
 	/opt/Qt/5.11.2/gcc_64/bin/moc $(DEFINES) --include /home/paolo95/Scrivania/Programmi/C++/Programma_Buste/moc_predefs.h -I/opt/Qt/5.11.2/gcc_64/mkspecs/linux-g++ -I/home/paolo95/Scrivania/Programmi/C++/Programma_Buste -I/opt/Qt/5.11.2/gcc_64/include -I/opt/Qt/5.11.2/gcc_64/include/QtWidgets -I/opt/Qt/5.11.2/gcc_64/include/QtGui -I/opt/Qt/5.11.2/gcc_64/include/QtSql -I/opt/Qt/5.11.2/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include centroFiera.h -o moc_centroFiera.cpp
 
+moc_gestioneMateriale.cpp: /opt/Qt/5.11.2/gcc_64/include/QtWidgets/QDialog \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qline.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtouchdevice.h \
+		gestioneMateriale.h \
+		moc_predefs.h \
+		/opt/Qt/5.11.2/gcc_64/bin/moc
+	/opt/Qt/5.11.2/gcc_64/bin/moc $(DEFINES) --include /home/paolo95/Scrivania/Programmi/C++/Programma_Buste/moc_predefs.h -I/opt/Qt/5.11.2/gcc_64/mkspecs/linux-g++ -I/home/paolo95/Scrivania/Programmi/C++/Programma_Buste -I/opt/Qt/5.11.2/gcc_64/include -I/opt/Qt/5.11.2/gcc_64/include/QtWidgets -I/opt/Qt/5.11.2/gcc_64/include/QtGui -I/opt/Qt/5.11.2/gcc_64/include/QtSql -I/opt/Qt/5.11.2/gcc_64/include/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include gestioneMateriale.h -o moc_gestioneMateriale.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_gestioneRichieste.h ui_modificaRichiesta.h ui_gestioneAnagrafica.h ui_centroFiera.h
+compiler_uic_make_all: ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_gestioneRichieste.h ui_modificaRichiesta.h ui_gestioneAnagrafica.h ui_centroFiera.h ui_elencotari.h ui_gestioneMateriale.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_gestioneRichieste.h ui_modificaRichiesta.h ui_gestioneAnagrafica.h ui_centroFiera.h
+	-$(DEL_FILE) ui_login.h ui_info.h ui_consegnaMateriale.h ui_mainMenu.h ui_elencotari.h ui_gestioneRichieste.h ui_modificaRichiesta.h ui_gestioneAnagrafica.h ui_centroFiera.h ui_elencotari.h ui_gestioneMateriale.h
 ui_login.h: login.ui \
 		/opt/Qt/5.11.2/gcc_64/bin/uic
 	/opt/Qt/5.11.2/gcc_64/bin/uic login.ui -o ui_login.h
@@ -3363,10 +3486,6 @@ ui_mainMenu.h: mainMenu.ui \
 		/opt/Qt/5.11.2/gcc_64/bin/uic
 	/opt/Qt/5.11.2/gcc_64/bin/uic mainMenu.ui -o ui_mainMenu.h
 
-ui_elencotari.h: elencotari.ui \
-		/opt/Qt/5.11.2/gcc_64/bin/uic
-	/opt/Qt/5.11.2/gcc_64/bin/uic elencotari.ui -o ui_elencotari.h
-
 ui_gestioneRichieste.h: gestioneRichieste.ui \
 		/opt/Qt/5.11.2/gcc_64/bin/uic
 	/opt/Qt/5.11.2/gcc_64/bin/uic gestioneRichieste.ui -o ui_gestioneRichieste.h
@@ -3382,6 +3501,14 @@ ui_gestioneAnagrafica.h: gestioneAnagrafica.ui \
 ui_centroFiera.h: centroFiera.ui \
 		/opt/Qt/5.11.2/gcc_64/bin/uic
 	/opt/Qt/5.11.2/gcc_64/bin/uic centroFiera.ui -o ui_centroFiera.h
+
+ui_elencotari.h: elencotari.ui \
+		/opt/Qt/5.11.2/gcc_64/bin/uic
+	/opt/Qt/5.11.2/gcc_64/bin/uic elencotari.ui -o ui_elencotari.h
+
+ui_gestioneMateriale.h: gestioneMateriale.ui \
+		/opt/Qt/5.11.2/gcc_64/bin/uic
+	/opt/Qt/5.11.2/gcc_64/bin/uic gestioneMateriale.ui -o ui_gestioneMateriale.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -3699,6 +3826,7 @@ main.o: main.cpp login.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
@@ -4008,6 +4136,7 @@ login.o: login.cpp login.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		ui_login.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QMenuBar \
@@ -4472,6 +4601,7 @@ consegnaMateriale.o: consegnaMateriale.cpp consegnaMateriale.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o consegnaMateriale.o consegnaMateriale.cpp
 
@@ -5037,6 +5167,7 @@ mainMenu.o: mainMenu.cpp mainMenu.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		ui_mainMenu.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QGraphicsView \
@@ -5357,6 +5488,7 @@ elencoTari.o: elencoTari.cpp elencotari.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		ui_elencotari.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o elencoTari.o elencoTari.cpp
@@ -5663,6 +5795,7 @@ gestioneRichieste.o: gestioneRichieste.cpp gestioneRichieste.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtableview.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QWidget \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h
@@ -5971,6 +6104,7 @@ modificaRichiesta.o: modificaRichiesta.cpp modificaRichiesta.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtableview.h \
 		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QWidget \
 		gestioneAnagrafica.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		ui_gestioneRichieste.h \
 		ui_modificaRichiesta.h \
@@ -6282,6 +6416,7 @@ gestioneAnagrafica.o: gestioneAnagrafica.cpp gestioneAnagrafica.h \
 		gestioneRichieste.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
+		gestioneMateriale.h \
 		centroFiera.h \
 		ui_gestioneAnagrafica.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gestioneAnagrafica.o gestioneAnagrafica.cpp
@@ -6591,8 +6726,121 @@ centroFiera.o: centroFiera.cpp centroFiera.h \
 		modificaRichiesta.h \
 		ui_gestioneRichieste.h \
 		gestioneAnagrafica.h \
-		ui_centroFiera.h
+		gestioneMateriale.h \
+		ui_centroFiera.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QDateEdit \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qdatetimeedit.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QSpinBox \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qspinbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o centroFiera.o centroFiera.cpp
+
+gestioneMateriale.o: gestioneMateriale.cpp gestioneMateriale.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/QDialog \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qline.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt/5.11.2/gcc_64/include/QtGui/qtouchdevice.h \
+		ui_gestioneMateriale.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gestioneMateriale.o gestioneMateriale.cpp
 
 moc_login.o: moc_login.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_login.o moc_login.cpp
@@ -6620,6 +6868,9 @@ moc_gestioneAnagrafica.o: moc_gestioneAnagrafica.cpp
 
 moc_centroFiera.o: moc_centroFiera.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_centroFiera.o moc_centroFiera.cpp
+
+moc_gestioneMateriale.o: moc_gestioneMateriale.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gestioneMateriale.o moc_gestioneMateriale.cpp
 
 ####### Install
 

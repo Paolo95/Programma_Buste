@@ -8,6 +8,7 @@
 #include "consegnaMateriale.h"
 #include "gestioneRichieste.h"
 #include "gestioneAnagrafica.h"
+#include "gestioneMateriale.h"
 #include "centroFiera.h"
 
 namespace Ui {
@@ -32,6 +33,8 @@ private slots:
     void on_btnAnagrafica_clicked();
 
     void on_btnCentroFiera_clicked();
+
+    void on_btnGestioneMateriale_clicked();
 
 private:
     Ui::MainMenu *ui;

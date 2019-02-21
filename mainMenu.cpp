@@ -89,3 +89,10 @@ void MainMenu::on_btnCentroFiera_clicked()
     CentroFiera *fiera= new CentroFiera(this);
     fiera->show();
 }
+
+void MainMenu::on_btnGestioneMateriale_clicked()
+{
+    this->hide();
+    GestioneMateriale *g_materiale= new GestioneMateriale(this);
+    g_materiale->show();
+}
