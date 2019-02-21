@@ -162,6 +162,32 @@
      <string>Gestione Richieste</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnGestioneMateriale">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>350</y>
+      <width>191</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gestione Materiale</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnGestioneArrivi">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>230</y>
+      <width>151</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gestione Arrivi</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

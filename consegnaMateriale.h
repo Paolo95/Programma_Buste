@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CONSEGNA_MATERIALE_H
 #define CONSEGNA_MATERIALE_H
 
@@ -21,7 +23,7 @@ class Consegna_Materiale : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Consegna_Materiale(QWidget *parent = 0);
+    explicit Consegna_Materiale(QWidget *parent = nullptr);
     Ui::Consegna_Materiale *ui;
     ~Consegna_Materiale();
 

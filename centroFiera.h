@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef CENTROFIERA_H
 #define CENTROFIERA_H
 
@@ -13,12 +15,54 @@ class CentroFiera : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit CentroFiera(QWidget *parent = 0);
+    explicit CentroFiera(QWidget *parent = nullptr);
     ~CentroFiera();
+
+private slots:
+    void on_btnEsci_clicked();
+
+    void on_comboBoxCategoria_currentIndexChanged(const QString &arg1);
+
+    void on_comboBoxTipologia_currentIndexChanged(const QString &arg1);
+
+    void on_btnAggiungi_clicked();
+
+    void on_btnElimina_clicked();
+
+    void on_commandLinkBtnConferma_clicked();
+
+    void on_btnPulisci_clicked();
 
 private:
     Ui::CentroFiera *ui;
+    unsigned int n_buste;
+    string quantitaIns;
+    string codiceMaterialeIns;
+    unsigned int numero_buste_cf(string);
+    unsigned int numero_buste_biblioteca(string);
+    unsigned int numero_bidoni_cf(string,string,string);
+    unsigned int numero_bidoni_biblioteca(string,string,string);
+    unsigned int numero_bidoni_cf(string,string);
+    unsigned int numero_bidoni_biblioteca(string,string);
+    unsigned int numero_calendari_cf(string);
+    unsigned int numero_calendari_biblioteca(string);
+    QDate dataArrivoDefault = QDate::currentDate();
+    void popolaCategoria();
+    void popolaDati();
+    int currentRow=0;
+    QAbstractItemModel* model;
+    void popolaTipologia(string);
+    void popolaDimensione(string,string);
+    void impostaTabellaArrivo();
+    QString dataUltimoArrivo();
     void closeEvent (QCloseEvent *);
+    QMessageBox error;
+    QMessageBox MessageExitCentroFiera;
+    QAbstractButton *BtnSiCentroFiera;
+    QAbstractButton *BtnNoCentroFiera;
+    DbConnect *db;
+    QSqlQuery query;
+    string stringQuery;
 };
 
 #endif // CENTROFIERA_H

@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef GESTIONEANAGRAFICA_H
 #define GESTIONEANAGRAFICA_H
 
@@ -13,7 +15,7 @@ class GestioneAnagrafica : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit GestioneAnagrafica(QWidget *parent = 0);
+    explicit GestioneAnagrafica(QWidget *parent = nullptr);
     string ragioneSociale;
     string cognome;
     string nome;

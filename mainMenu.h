@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
@@ -17,7 +19,7 @@ class MainMenu : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainMenu(QWidget *parent = 0);
+    explicit MainMenu(QWidget *parent = nullptr);
     ~MainMenu();
 
 private slots:

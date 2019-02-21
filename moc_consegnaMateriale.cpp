@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'consegnaMateriale.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.10.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.11.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'consegnaMateriale.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.10.1. It"
+#error "This file was generated using the moc from 5.11.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Consegna_Materiale_t {
-    QByteArrayData data[13];
-    char stringdata0[247];
+    QByteArrayData data[14];
+    char stringdata0[259];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,7 +43,8 @@ QT_MOC_LITERAL(8, 148, 20), // "on_BtnElenco_clicked"
 QT_MOC_LITERAL(9, 169, 29), // "on_cmdLinkBtnVerifica_clicked"
 QT_MOC_LITERAL(10, 199, 19), // "on_btnSalva_clicked"
 QT_MOC_LITERAL(11, 219, 21), // "on_tblRicerca_clicked"
-QT_MOC_LITERAL(12, 241, 5) // "index"
+QT_MOC_LITERAL(12, 241, 11), // "QModelIndex"
+QT_MOC_LITERAL(13, 253, 5) // "index"
 
     },
     "Consegna_Materiale\0setValoriPrivato\0"
@@ -52,7 +53,7 @@ QT_MOC_LITERAL(12, 241, 5) // "index"
     "on_rBtnAzienda_clicked\0on_BtnElenco_clicked\0"
     "on_cmdLinkBtnVerifica_clicked\0"
     "on_btnSalva_clicked\0on_tblRicerca_clicked\0"
-    "index"
+    "QModelIndex\0index"
 };
 #undef QT_MOC_LITERAL
 
@@ -91,7 +92,7 @@ static const uint qt_meta_data_Consegna_Materiale[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QModelIndex,   12,
+    QMetaType::Void, 0x80000000 | 12,   13,
 
        0        // eod
 };

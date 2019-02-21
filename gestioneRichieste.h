@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef GESTIONERICHIESTE_H
 #define GESTIONERICHIESTE_H
 
@@ -14,7 +16,7 @@ class GestioneRichieste : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit GestioneRichieste(QWidget *parent = 0);
+    explicit GestioneRichieste(QWidget *parent = nullptr);
     Ui::GestioneRichieste *ui;
     string dataRichiesta;
     unsigned int nRosse;

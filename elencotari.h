@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef ELENCOTARI_H
 #define ELENCOTARI_H
 
@@ -16,7 +18,7 @@ class ElencoTari : public QDialog
     Q_OBJECT
 
 public:
-    explicit ElencoTari(class Consegna_Materiale *,QWidget *parent = 0);
+    explicit ElencoTari(class Consegna_Materiale *,QWidget *parent = nullptr);
     ~ElencoTari();
 
 signals:

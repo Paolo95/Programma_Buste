@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef MODIFICARICHIESTA_H
 #define MODIFICARICHIESTA_H
 
@@ -14,7 +16,7 @@ class ModificaRichiesta : public QDialog
     Q_OBJECT
 
 public:
-    explicit ModificaRichiesta(class GestioneRichieste *,QWidget *parent = 0);
+    explicit ModificaRichiesta(class GestioneRichieste *,QWidget *parent = nullptr);
     ~ModificaRichiesta();
 
 signals:

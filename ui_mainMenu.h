@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainMenu.ui'
 **
-** Created by: Qt User Interface Compiler version 5.10.1
+** Created by: Qt User Interface Compiler version 5.11.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,11 +10,8 @@
 #define UI_MAINMENU_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -37,6 +34,8 @@ public:
     QPushButton *btnStatistiche;
     QPushButton *btnImpostazioni;
     QPushButton *btnGestioneRichieste;
+    QPushButton *btnGestioneMateriale;
+    QPushButton *btnGestioneArrivi;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -85,6 +84,12 @@ public:
         btnGestioneRichieste = new QPushButton(centralwidget);
         btnGestioneRichieste->setObjectName(QStringLiteral("btnGestioneRichieste"));
         btnGestioneRichieste->setGeometry(QRect(210, 110, 191, 111));
+        btnGestioneMateriale = new QPushButton(centralwidget);
+        btnGestioneMateriale->setObjectName(QStringLiteral("btnGestioneMateriale"));
+        btnGestioneMateriale->setGeometry(QRect(210, 350, 191, 111));
+        btnGestioneArrivi = new QPushButton(centralwidget);
+        btnGestioneArrivi->setObjectName(QStringLiteral("btnGestioneArrivi"));
+        btnGestioneArrivi->setGeometry(QRect(410, 230, 151, 111));
         MainMenu->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainMenu);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -111,6 +116,8 @@ public:
         btnStatistiche->setText(QApplication::translate("MainMenu", "Statistiche", nullptr));
         btnImpostazioni->setText(QApplication::translate("MainMenu", "Impostazioni", nullptr));
         btnGestioneRichieste->setText(QApplication::translate("MainMenu", "Gestione Richieste", nullptr));
+        btnGestioneMateriale->setText(QApplication::translate("MainMenu", "Gestione Materiale", nullptr));
+        btnGestioneArrivi->setText(QApplication::translate("MainMenu", "Gestione Arrivi", nullptr));
     } // retranslateUi
 
 };
