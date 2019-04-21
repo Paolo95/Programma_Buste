@@ -16,6 +16,9 @@ class GestioneAnagrafica : public QMainWindow
 
 public:
     explicit GestioneAnagrafica(QWidget *parent = nullptr);
+    QMessageBox MessageExitGestioneMateriale;
+    QAbstractButton *BtnSiGestioneMateriale;
+    QAbstractButton *BtnNoGestioneMateriale;
     string ragioneSociale;
     string cognome;
     string nome;

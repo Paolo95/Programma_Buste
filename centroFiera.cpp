@@ -405,3 +405,10 @@ void CentroFiera::popolaDati(){
     ui->dateEditArrivo->setDate(dataArrivoDefault);
 
 }
+
+void CentroFiera::on_btnVaiArrivi_clicked()
+{
+    GestioneArrivi* ga= new GestioneArrivi();
+    ga->show();
+    this->hide();
+}

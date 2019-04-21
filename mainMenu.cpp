@@ -96,3 +96,10 @@ void MainMenu::on_btnGestioneMateriale_clicked()
     GestioneMateriale *g_materiale= new GestioneMateriale(this);
     g_materiale->show();
 }
+
+void MainMenu::on_btnGestioneArrivi_clicked()
+{
+    this->hide();
+    GestioneArrivi *arrivi = new GestioneArrivi(this);
+    arrivi->show();
+}

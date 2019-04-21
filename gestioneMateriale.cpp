@@ -96,7 +96,7 @@ void GestioneMateriale::on_btnCerca_clicked()
 
 void GestioneMateriale::on_btnPulisci_clicked()
 {
-    model->clear();
+    model=new QSqlQueryModel();
     ui->tblMateriale->setModel(model);
 }
 

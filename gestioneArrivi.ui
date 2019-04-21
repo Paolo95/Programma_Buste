@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GestioneArrivi</class>
+ <widget class="QDialog" name="GestioneArrivi">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>760</width>
+    <height>378</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>760</width>
+    <height>378</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>760</width>
+    <height>378</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Gestione Arrivi</string>
+  </property>
+  <widget class="QPushButton" name="btnEsci">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>320</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Esci</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMostraCategoria">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>201</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Mostra elenco a partire dal:</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="tblArrivi">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>641</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QPushButton" name="btnElimina">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>140</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Elimina</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCerca">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>10</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cerca</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="grpGestione">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>200</y>
+     <width>641</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="lblCategoria">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>30</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Categoria</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblTipologia">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>30</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tipologia</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblDimensione">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>30</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dimensione</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBoxCategoria">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>60</y>
+      <width>121</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBoxTipologia">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>60</y>
+      <width>121</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSalva">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>120</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Salva</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblQuantita">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>30</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Quantità</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBoxQuantita">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>60</y>
+      <width>61</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>500</number>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBoxDimensione">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>60</y>
+      <width>121</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dateEditDataArrivo">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>110</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelDataArrivo">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Data arrivo</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnPulisci">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>50</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pulisci</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEditDataRicerca">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>10</y>
+     <width>110</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="displayFormat">
+    <string>dd/MM/yy</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnModifica">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>110</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Modifica</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbtnCentroFiera">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>10</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Centro Fiera</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbtnBiblioteca">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>10</y>
+     <width>112</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Biblioteca</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

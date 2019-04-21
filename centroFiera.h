@@ -33,6 +33,8 @@ private slots:
 
     void on_btnPulisci_clicked();
 
+    void on_btnVaiArrivi_clicked();
+
 private:
     Ui::CentroFiera *ui;
     unsigned int n_buste;
