@@ -38,7 +38,8 @@ SOURCES += \
     gestioneAnagrafica.cpp \
     centroFiera.cpp \
     gestioneMateriale.cpp \
-    gestioneArrivi.cpp
+    gestioneArrivi.cpp \
+    biblioteca.cpp
 
 HEADERS += \
         login.h \
@@ -52,7 +53,8 @@ HEADERS += \
     gestioneAnagrafica.h \
     centroFiera.h \
     gestioneMateriale.h \
-    gestioneArrivi.h
+    gestioneArrivi.h \
+    biblioteca.h
 
 FORMS += \
         login.ui \
@@ -66,4 +68,5 @@ FORMS += \
     centroFiera.ui \
     elencotari.ui \
     gestioneMateriale.ui \
-    gestioneArrivi.ui
+    gestioneArrivi.ui \
+    biblioteca.ui

@@ -384,7 +384,12 @@ void CentroFiera::on_commandLinkBtnConferma_clicked()
 
 void CentroFiera::on_btnPulisci_clicked()
 {
-    model = new QStandardItemModel(this);
+    while(currentRow>0){
+        model->removeRow(currentRow-1);
+        currentRow--;
+    }
+    ui->btnElimina->setEnabled(false);
+    ui->commandLinkBtnConferma->setEnabled(false);
     ui->tblArrivo->setModel(model);
 }
 

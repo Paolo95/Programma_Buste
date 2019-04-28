@@ -103,3 +103,10 @@ void MainMenu::on_btnGestioneArrivi_clicked()
     GestioneArrivi *arrivi = new GestioneArrivi(this);
     arrivi->show();
 }
+
+void MainMenu::on_btnBiblioteca_clicked()
+{
+    this->hide();
+    Biblioteca *biblio= new Biblioteca(this);
+    biblio->show();
+}
