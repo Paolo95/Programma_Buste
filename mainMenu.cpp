@@ -8,6 +8,7 @@ MainMenu::MainMenu(QWidget *parent) :
     ui(new Ui::MainMenu)
 {
     ui->setupUi(this);
+    popolaTabellaReminders();
 }
 
 MainMenu::~MainMenu()
@@ -109,4 +110,33 @@ void MainMenu::on_btnBiblioteca_clicked()
     this->hide();
     Biblioteca *biblio= new Biblioteca(this);
     biblio->show();
+}
+
+void MainMenu::popolaTabellaReminders(){
+
+    model = new QStringListModel(this);
+    CentroFiera *c = new CentroFiera(this);
+    if (c->numero_buste_biblioteca("ROSSE")<=50) list<<"Buste rosse in Biblioteca in esaurimento!";
+    if (c->numero_buste_biblioteca("BLU")<=50)  list<<"Buste blu in Biblioteca in esaurimento!";
+    if (c->numero_buste_biblioteca("BIANCHE")<=50) list<<"Buste bianche in Biblioteca in esaurimento!";
+    if (c->numero_buste_biblioteca("VERDI")<=50) list<<"Buste verdi in Biblioteca in esaurimento!";
+    if (c->numero_buste_cf("ROSSE")<=50) list<<"Buste rosse in Centro Fiera in esaurimento!";
+    if (c->numero_buste_cf("BLU")<=50) list<<"Buste blu in Centro Fiera in esaurimento!";
+    if (c->numero_buste_cf("BIANCHE")<=50) list<<"Buste bianche in Centro Fiera in esaurimento!";
+    if (c->numero_buste_cf("VERDI")<=50) list<<"Buste verdi in Centro Fiera in esaurimento!";
+    if (c->numero_bidoni_biblioteca("MASTELLO","UMIDO")<=10) list<<"Mastelli umido in Biblioteca in esaurimento!";
+    if (c->numero_bidoni_biblioteca("MASTELLO","VETRO")<=10) list<<"Mastelli vetro in Biblioteca in esaurimento!";
+    if (c->numero_bidoni_biblioteca("SECCHIO","UMIDO","240")<=10) list<<"Bidoni umido da 240 in Biblioteca in esaurimento!";
+    if (c->numero_bidoni_biblioteca("SECCHIO","UMIDO","360")<=10) list<<"Bidoni umido da 360 in Biblioteca in esaurimento!";
+    if (c->numero_bidoni_biblioteca("SECCHIO","VETRO","240")<=10) list<<"Bidoni vetro in Biblioteca in esaurimento!";
+    if (c->numero_bidoni_biblioteca("SECCHIO","VETRO","360")<=10) list<<"Bidoni vetro in Biblioteca in esaurimento!";
+    if (c->numero_bidoni_cf("MASTELLO","UMIDO")<=10) list<<"Mastelli umido in Centro Fiera in esaurimento!";
+    if (c->numero_bidoni_cf("MASTELLO","VETRO")<=10) list<<"Mastelli vetro in Centro Fiera in esaurimento!";
+    if (c->numero_bidoni_cf("SECCHIO","UMIDO","240")<=10) list<<"Bidoni umido da 240 in Centro Fiera in esaurimento!";
+    if (c->numero_bidoni_cf("SECCHIO","UMIDO","360")<=10) list<<"Bidoni umido da 360 in Centro Fiera in esaurimento!";
+    if (c->numero_bidoni_cf("SECCHIO","VETRO","240")<=10) list<<"Bidoni vetro da 240 in Centro Fiera in esaurimento!";
+    if (c->numero_bidoni_cf("SECCHIO","VETRO","360")<=10) list<<"Bidoni vetro da 360 in Centro Fiera in esaurimento!";
+    model->setStringList(list);
+    ui->tblReminders->setModel(model);
+    ui->tblReminders->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }

@@ -16,6 +16,14 @@ class CentroFiera : public QMainWindow
 
 public:
     explicit CentroFiera(QWidget *parent = nullptr);
+    unsigned int numero_buste_cf(string);
+    unsigned int numero_buste_biblioteca(string);
+    unsigned int numero_bidoni_cf(string,string,string);
+    unsigned int numero_bidoni_biblioteca(string,string,string);
+    unsigned int numero_bidoni_cf(string,string);
+    unsigned int numero_bidoni_biblioteca(string,string);
+    unsigned int numero_calendari_cf(string);
+    unsigned int numero_calendari_biblioteca(string);
     ~CentroFiera();
 
 private slots:
@@ -40,14 +48,6 @@ private:
     unsigned int n_buste;
     string quantitaIns;
     string codiceMaterialeIns;
-    unsigned int numero_buste_cf(string);
-    unsigned int numero_buste_biblioteca(string);
-    unsigned int numero_bidoni_cf(string,string,string);
-    unsigned int numero_bidoni_biblioteca(string,string,string);
-    unsigned int numero_bidoni_cf(string,string);
-    unsigned int numero_bidoni_biblioteca(string,string);
-    unsigned int numero_calendari_cf(string);
-    unsigned int numero_calendari_biblioteca(string);
     QDate dataArrivoDefault = QDate::currentDate();
     void popolaCategoria();
     void popolaDati();

@@ -48,6 +48,9 @@ private:
     QAbstractButton *BtnSiMainMenu;
     QAbstractButton *BtnNoMainMenu;
     void closeEvent (QCloseEvent *event);
+    void popolaTabellaReminders();
+    QStringListModel* model;
+    QStringList list;
 };
 
 #endif // MAINMENU_H
