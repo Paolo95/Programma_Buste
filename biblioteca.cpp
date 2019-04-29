@@ -18,6 +18,14 @@ Biblioteca::~Biblioteca()
     delete ui;
 }
 
+void Biblioteca::closeEvent (QCloseEvent *event)
+{
+    event->ignore();
+    this->hide();
+    MainMenu *menu = new MainMenu (this);
+    menu->show();
+}
+
 void Biblioteca::on_btnEsci_clicked()
 {
     MessageExitBiblioteca.setWindowTitle("Vuoi tornare indietro?");

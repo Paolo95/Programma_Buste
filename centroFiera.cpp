@@ -48,9 +48,9 @@ void CentroFiera::on_btnEsci_clicked()
 }
 }
 
-unsigned int CentroFiera::numero_buste_cf(string tipologia){
+int CentroFiera::numero_buste_cf(string tipologia){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="CREATE VIEW moltiplicazioni AS "
@@ -62,7 +62,7 @@ unsigned int CentroFiera::numero_buste_cf(string tipologia){
                 "FROM moltiplicazioni";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery="DROP VIEW moltiplicazioni";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     stringQuery.clear();
@@ -71,9 +71,9 @@ unsigned int CentroFiera::numero_buste_cf(string tipologia){
     return risultato;
 }
 
-unsigned int CentroFiera::numero_buste_biblioteca(string tipologia){
+int CentroFiera::numero_buste_biblioteca(string tipologia){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="CREATE VIEW moltiplicazioni AS "
@@ -85,7 +85,7 @@ unsigned int CentroFiera::numero_buste_biblioteca(string tipologia){
                 "FROM moltiplicazioni";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery="DROP VIEW moltiplicazioni";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     stringQuery.clear();
@@ -94,9 +94,9 @@ unsigned int CentroFiera::numero_buste_biblioteca(string tipologia){
     return risultato;
 }
 
-unsigned int CentroFiera::numero_bidoni_biblioteca(string categoria, string tipologia){
+int CentroFiera::numero_bidoni_biblioteca(string categoria, string tipologia){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="SELECT SUM(quantita) as risultati "
@@ -104,16 +104,16 @@ unsigned int CentroFiera::numero_bidoni_biblioteca(string categoria, string tipo
                 "WHERE m.cod_materiale=b.materiale AND m.categoria='"+categoria+"' AND m.tipologia='"+tipologia+"' ";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery.clear();
     query.clear();
     db->closeConnection();
     return risultato;
 }
 
-unsigned int CentroFiera::numero_bidoni_cf(string categoria, string tipologia){
+int CentroFiera::numero_bidoni_cf(string categoria, string tipologia){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="SELECT SUM(quantita) as risultati "
@@ -121,16 +121,16 @@ unsigned int CentroFiera::numero_bidoni_cf(string categoria, string tipologia){
                 "WHERE m.cod_materiale=cf.materiale AND m.categoria='"+categoria+"' AND m.tipologia='"+tipologia+"' ";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery.clear();
     query.clear();
     db->closeConnection();
     return risultato;
 }
 
-unsigned int CentroFiera::numero_bidoni_biblioteca(string categoria, string tipologia, string dimensione){
+int CentroFiera::numero_bidoni_biblioteca(string categoria, string tipologia, string dimensione){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="SELECT SUM(quantita) as risultati "
@@ -138,16 +138,16 @@ unsigned int CentroFiera::numero_bidoni_biblioteca(string categoria, string tipo
                 "WHERE m.cod_materiale=b.materiale AND m.categoria='"+categoria+"' AND m.tipologia='"+tipologia+"' AND m.dimensione='"+dimensione+"'";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery.clear();
     query.clear();
     db->closeConnection();
     return risultato;
 }
 
-unsigned int CentroFiera::numero_bidoni_cf(string categoria, string tipologia ,string dimensione){
+int CentroFiera::numero_bidoni_cf(string categoria, string tipologia ,string dimensione){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="SELECT SUM(quantita) as risultati "
@@ -155,7 +155,7 @@ unsigned int CentroFiera::numero_bidoni_cf(string categoria, string tipologia ,s
                 "WHERE m.cod_materiale=cf.materiale AND m.categoria='"+categoria+"' AND m.tipologia='"+tipologia+"' AND m.dimensione='"+dimensione+"'";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery.clear();
     query.clear();
     db->closeConnection();
@@ -163,9 +163,9 @@ unsigned int CentroFiera::numero_bidoni_cf(string categoria, string tipologia ,s
 }
 
 
-unsigned int CentroFiera::numero_calendari_biblioteca(string categoria){
+int CentroFiera::numero_calendari_biblioteca(string categoria){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="SELECT SUM(quantita) as risultati "
@@ -173,16 +173,16 @@ unsigned int CentroFiera::numero_calendari_biblioteca(string categoria){
                 "WHERE m.cod_materiale=b.materiale AND m.categoria='"+categoria+"'";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery.clear();
     query.clear();
     db->closeConnection();
     return risultato;
 }
 
-unsigned int CentroFiera::numero_calendari_cf(string categoria){
+int CentroFiera::numero_calendari_cf(string categoria){
 
-    unsigned int risultato=0;
+    int risultato=0;
     db = new DbConnect();
     db->openConnection();
     stringQuery="SELECT SUM(quantita) as risultati "
@@ -190,7 +190,7 @@ unsigned int CentroFiera::numero_calendari_cf(string categoria){
                 "WHERE m.cod_materiale=cf.materiale AND m.categoria='"+categoria+"'";
     query = db->executeQuery(QString::fromStdString(stringQuery));
     query.next();
-    risultato=query.value(0).toUInt();
+    risultato=query.value(0).toInt();
     stringQuery.clear();
     query.clear();
     db->closeConnection();
@@ -395,17 +395,28 @@ void CentroFiera::on_btnPulisci_clicked()
 
 void CentroFiera::popolaDati(){
 
-    ui->txtRosse->setText(QString::number(numero_buste_cf("ROSSE")-numero_buste_biblioteca("ROSSE")));
-    ui->txtBlu->setText(QString::number(numero_buste_cf("BLU")-numero_buste_biblioteca("BLU")));
-    ui->txtBianche->setText(QString::number(numero_buste_cf("BIANCHE")-numero_buste_biblioteca("BIANCHE")));
-    ui->txtVerdi->setText(QString::number(numero_buste_cf("VERDI")-numero_buste_biblioteca("VERDI")));
-    ui->txtMastelliUmido->setText(QString::number(numero_bidoni_cf("MASTELLO","UMIDO")-numero_bidoni_biblioteca("MASTELLO","UMIDO")));
-    ui->txtMastelliVetro->setText(QString::number(numero_bidoni_cf("MASTELLO","VETRO")-numero_bidoni_biblioteca("MASTELLO","VETRO")));
-    ui->txtSecchiUmido240->setText(QString::number(numero_bidoni_cf("SECCHIO","UMIDO","240")-numero_bidoni_biblioteca("SECCHIO","UMIDO","240")));
-    ui->txtSecchiUmido360->setText(QString::number(numero_bidoni_cf("SECCHIO","UMIDO","360")-numero_bidoni_biblioteca("SECCHIO","UMIDO","360")));
-    ui->txtSecchiVetro240->setText(QString::number(numero_bidoni_cf("SECCHIO","VETRO","240")-numero_bidoni_biblioteca("SECCHIO","VETRO","240")));
-    ui->txtSecchiVetro360->setText(QString::number(numero_bidoni_cf("SECCHIO","VETRO","360")-numero_bidoni_biblioteca("SECCHIO","VETRO","360")));
-    ui->txtCalendari->setText(QString::number((numero_calendari_cf("CALENDARI")-numero_calendari_biblioteca("CALENDARI"))));
+    int dato=numero_buste_cf("ROSSE")-numero_buste_biblioteca("ROSSE");
+    ui->txtRosse->setText(QString::number(dato));
+    dato=numero_buste_cf("BLU")-numero_buste_biblioteca("BLU");
+    ui->txtBlu->setText(QString::number(dato));
+    dato=numero_buste_cf("BIANCHE")-numero_buste_biblioteca("BIANCHE");
+    ui->txtBianche->setText(QString::number(dato));
+    dato=numero_buste_cf("VERDI")-numero_buste_biblioteca("VERDI");
+    ui->txtVerdi->setText(QString::number(dato));
+    dato=numero_bidoni_cf("MASTELLO","UMIDO")-numero_bidoni_biblioteca("MASTELLO","UMIDO");
+    ui->txtMastelliUmido->setText(QString::number(dato));
+    dato=numero_bidoni_cf("MASTELLO","VETRO")-numero_bidoni_biblioteca("MASTELLO","VETRO");
+    ui->txtMastelliVetro->setText(QString::number(dato));
+    dato=numero_bidoni_cf("SECCHIO","UMIDO","240")-numero_bidoni_biblioteca("SECCHIO","UMIDO","240");
+    ui->txtSecchiUmido240->setText(QString::number(dato));
+    dato=numero_bidoni_cf("SECCHIO","UMIDO","360")-numero_bidoni_biblioteca("SECCHIO","UMIDO","360");
+    ui->txtSecchiUmido360->setText(QString::number(dato));
+    dato=numero_bidoni_cf("SECCHIO","VETRO","240")-numero_bidoni_biblioteca("SECCHIO","VETRO","240");
+    ui->txtSecchiVetro240->setText(QString::number(dato));
+    dato=numero_bidoni_cf("SECCHIO","VETRO","360")-numero_bidoni_biblioteca("SECCHIO","VETRO","360");
+    ui->txtSecchiVetro360->setText(QString::number(dato));
+    dato=numero_calendari_cf("CALENDARI")-numero_calendari_biblioteca("CALENDARI");
+    ui->txtCalendari->setText(QString::number(dato));
     ui->lblDataArrivo->setText(dataUltimoArrivo());
     ui->dateEditArrivo->setDate(dataArrivoDefault);
 

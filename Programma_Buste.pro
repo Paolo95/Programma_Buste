@@ -8,7 +8,7 @@ QT       += \
             core gui \
             sql
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = Programma_Buste
 TEMPLATE = app
@@ -39,7 +39,9 @@ SOURCES += \
     centroFiera.cpp \
     gestioneMateriale.cpp \
     gestioneArrivi.cpp \
-    biblioteca.cpp
+    biblioteca.cpp \
+    statistiche.cpp \
+    Plugins/qcustomplot.cpp
 
 HEADERS += \
         login.h \
@@ -54,7 +56,9 @@ HEADERS += \
     centroFiera.h \
     gestioneMateriale.h \
     gestioneArrivi.h \
-    biblioteca.h
+    biblioteca.h \
+    statistiche.h \
+    Plugins/qcustomplot.h
 
 FORMS += \
         login.ui \
@@ -69,4 +73,5 @@ FORMS += \
     elencotari.ui \
     gestioneMateriale.ui \
     gestioneArrivi.ui \
-    biblioteca.ui
+    biblioteca.ui \
+    statistiche.ui

@@ -140,3 +140,10 @@ void MainMenu::popolaTabellaReminders(){
     ui->tblReminders->setModel(model);
     ui->tblReminders->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
+
+void MainMenu::on_btnStatistiche_clicked()
+{
+    this->hide();
+    Statistiche *stat = new Statistiche(this);
+    stat->show();
+}

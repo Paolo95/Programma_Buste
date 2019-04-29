@@ -55,6 +55,7 @@ private:
     int currentRow=0;
     string quantitaIns;
     string codiceMaterialeIns;
+    void closeEvent (QCloseEvent *event);
 };
 
 #endif // BIBLIOTECA_H

@@ -12,6 +12,7 @@
 #include "centroFiera.h"
 #include "gestioneArrivi.h"
 #include "biblioteca.h"
+#include "statistiche.h"
 
 namespace Ui {
 class MainMenu;
@@ -41,6 +42,8 @@ private slots:
     void on_btnGestioneArrivi_clicked();
 
     void on_btnBiblioteca_clicked();
+
+    void on_btnStatistiche_clicked();
 
 private:
     Ui::MainMenu *ui;
